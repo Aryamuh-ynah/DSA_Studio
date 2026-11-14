@@ -1,200 +1,374 @@
-# DSA Studio - Data Structures and Algorithms Practice Tracker
+# 🚀 DSA Studio — Data Structures & Algorithms Practice Tracker
 
-## Overview and Mission
+<div align="center">
 
-DSA Studio is a comprehensive, open-source Data Structures and Algorithms (DSA) practice platform designed to guide developers from fundamental concepts to advanced competitive programming topics.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+[![Discord](https://img.shields.io/badge/Discord-Join%20Community-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/7MhyE48Au)
+[![GitHub Stars](https://img.shields.io/github/stars/KanishJebaMathewM/DSA_Studio?style=for-the-badge&logo=github&color=blue)](https://github.com/KanishJebaMathewM/DSA_Studio/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/KanishJebaMathewM/DSA_Studio?style=for-the-badge&logo=github&color=blue)](https://github.com/KanishJebaMathewM/DSA_Studio/network/members)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![React 19](https://img.shields.io/badge/React%2019-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
+[![TanStack Start](https://img.shields.io/badge/TanStack%20Start-FF4154?style=for-the-badge&logo=react-query&logoColor=white)](https://tanstack.com/start)
+[![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 
-The primary motive behind DSA Studio is to eliminate the confusion and lack of structure often experienced when preparing for technical interviews or competitive coding. Rather than jumping randomly between problems, DSA Studio provides a curated, zero-to-hero learning path that ensures solid conceptual understanding before moving to complex algorithmic techniques.
+**A modern, structured zero-to-hero Data Structures & Algorithms practice platform, tracker, and revision system.**
+
+[Explore Problems](#-detailed-learning-roadmap) • [Features](#-core-features) • [Quickstart](#-getting-started) • [Contributing](#-contributing) • [Join Discord](#-community--discussion)
+
+</div>
+
+---
+
+## 📢 Join Our Community
+
+We have an active Discord server for discussing **DSA Studio**, sharing interview preparation strategies, collaborating on open-source projects, and helping each other grow!
+
+<div align="center">
+
+### 👉 **[Join the DSA Studio & Open Source Discord](https://discord.gg/7MhyE48Au)** 👈
+
+[![Join Discord](https://img.shields.io/badge/Discord-Join%20Server-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/7MhyE48Au)
+
+</div>
+
+**Why join?**
+- 💬 **DSA Discussions:** Ask questions, share problem solutions, and explore optimal time/space complexity approaches.
+- 🤝 **Open-Source Collaboration:** Discuss issues, feature requests, and contribute to DSA Studio alongside fellow developers.
+- 🚀 **Explore Other Projects:** Brainstorm, share, and collaborate on other exciting open-source initiatives and developer tools.
+- 🎯 **Interview & Contest Prep:** Discuss contests on LeetCode, Codeforces, and AtCoder with a supportive peer group.
+
+---
+
+## 📖 Table of Contents
+
+- [Overview & Mission](#-overview--mission)
+- [System Architecture](#-system-architecture)
+- [Core Features](#-core-features)
+- [Detailed Learning Roadmap](#-detailed-learning-roadmap)
+  - [Phase 1: Foundation Tier](#phase-1-foundation-tier)
+  - [Phase 2: Intermediate Tier](#phase-2-intermediate-tier)
+  - [Phase 3: Advanced Tier](#phase-3-advanced-tier)
+- [Classical Algorithm Coverage](#-classical-algorithm-coverage)
+- [Tech Stack](#-tech-stack)
+- [Project Structure](#-project-structure)
+- [Getting Started](#-getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation & Local Run](#installation--local-run)
+  - [Available Scripts](#available-scripts)
+- [Deployment](#-deployment)
+- [Contributing](#-contributing)
+- [Community & Discussion](#-community--discussion)
+- [License](#-license)
+
+---
+
+## 🎯 Overview & Mission
+
+When preparing for technical interviews or competitive programming, learners often face common hurdles:
+- **Overwhelming volume:** Thousands of scattered problems without clear logical prerequisites.
+- **Lack of continuity:** Jumping haphazardly between unrelated topics without solidifying core mental models.
+- **Retention loss:** Forgetting solved problems due to the absence of spaced repetition and targeted revision.
+
+**DSA Studio** solves this by providing a carefully curated, zero-to-hero learning progression across **22 foundational, intermediate, and advanced topic modules**. It unifies curated challenges from **LeetCode**, **GeeksforGeeks**, **CSES**, and **AtCoder**, paired with a persistent tracking and revision workflow.
+
+---
+
+## 🏗️ System Architecture
 
 ```
-+-------------------------------------------------------------------+
-|                        LEARNING PROGRESSION                       |
-+-------------------------------------------------------------------+
-|  1. FOUNDATION        |  2. INTERMEDIATE     |  3. ADVANCED       |
-|  - Math & Logic       |  - Linked Lists      |  - Graphs          |
-|  - Arrays & Strings   |  - Stacks & Queues   |  - Dynamic Prog.   |
-|  - Hashing            |  - Binary Search     |  - Tries           |
-|  - Two Pointers       |  - Backtracking      |  - Bitmasking      |
-|  - Sliding Window     |  - Trees & BST       |  - String Algos    |
-|  - Sorting            |  - Heaps & Greedy    |  - Segment Trees   |
-+-----------------------+----------------------+--------------------+
-                                  |
-                                  v
-+-------------------------------------------------------------------+
-|                    MULTI-PLATFORM INTEGRATION                     |
-|                                                                   |
-|       [ LeetCode ] + [ GeeksforGeeks ] + [ CSES ] + [ AtCoder ]   |
-+-------------------------------------------------------------------+
-                                  |
-                                  v
-+-------------------------------------------------------------------+
-|                     PROGRESS & REVISION SYSTEM                    |
-|                                                                   |
-|   [ Checklist ]    |    [ Bookmarks ]    |    [ Revision Queue ]  |
-+-------------------------------------------------------------------+
++-------------------------------------------------------------------------------+
+|                             LEARNING PROGRESSION                              |
++-------------------------------------------------------------------------------+
+|  1. FOUNDATION            |  2. INTERMEDIATE          |  3. ADVANCED          |
+|  - Math & Number Theory   |  - Linked Lists           |  - Graphs (BFS/DFS)   |
+|  - Arrays & Strings       |  - Stacks & Queues        |  - Dynamic Prog. (DP) |
+|  - Hashing                |  - Binary Search          |  - Trie (Prefix Tree) |
+|  - Two Pointers           |  - Recursion & Backtrack  |  - Bit Manipulation   |
+|  - Sliding Window         |  - Trees & BST            |  - String Algorithms  |
+|  - Prefix Sum & Diff Arr  |  - Heaps & Greedy         |  - Segment & Fenwick  |
+|  - Sorting Algorithms     |                           |                       |
++---------------------------+---------------------------+-----------------------+
+                                        |
+                                        v
++-------------------------------------------------------------------------------+
+|                          MULTI-PLATFORM INTEGRATION                           |
+|                                                                               |
+|       [ LeetCode ]   +   [ GeeksforGeeks ]   +   [ CSES ]   +   [ AtCoder ]   |
++-------------------------------------------------------------------------------+
+                                        |
+                                        v
++-------------------------------------------------------------------------------+
+|                          PROGRESS & REVISION ENGINE                           |
+|                                                                               |
+|   [ Checklist / Solved ]   |    [ Bookmarks ]    |    [ Spaced Revision ]     |
+|   [ Topic Breakdown % ]    |    [ Difficulty ]   |    [ Local Persistence ]   |
++-------------------------------------------------------------------------------+
 ```
 
 ---
 
-## Core Features and Philosophy
+## ✨ Core Features
 
-### 1. Zero-to-Hero Structured Roadmap
-DSA Studio categorizes topics into logical learning phases. Beginners start with basic math, array manipulation, and string processing before moving to pointers, recursion, tree traversals, graph algorithms, and dynamic programming.
-
-### 2. Multi-Platform Practice
-Practice problems link directly to LeetCode and GeeksforGeeks, with CSES graph and range-query challenges and the AtCoder Educational DP Contest included for deeper competitive-programming practice.
-
-### 3. Comprehensive Classical Algorithm Coverage
-The catalog includes standard, essential computer science algorithms:
-
-| Domain | Algorithms Included |
-| :--- | :--- |
-| **Shortest Path** | Dijkstra's Algorithm, Bellman-Ford, Floyd-Warshall |
-| **Minimum Spanning Tree** | Prim's Algorithm, Kruskal's Algorithm, Disjoint Set Union (DSU) |
-| **Graph Traversal & SCC** | Breadth-First Search, Depth-First Search, Tarjan's SCC, Kosaraju's Algorithm |
-| **String Matching** | Knuth-Morris-Pratt (KMP), Rabin-Karp, Z-Algorithm, Manacher's Algorithm |
-| **Optimization & DP** | Kadane's Algorithm, 0/1 Knapsack, Unbounded Knapsack, LIS, LCS, Matrix Chain Multiplication, Bitmask DP |
-
-### 4. Spaced Repetition and Revision Queue
-Learners can mark problems as completed, bookmark key questions for reference, or tag challenging problems for later revision. All progress is persisted locally.
+- **Structured 22-Topic Progression**: Progressive roadmap starting from elementary mathematics and two-pointer basics up to complex graph theory, dynamic programming, and range query trees.
+- **Multi-Platform Integration**: Direct links to vetted problems on LeetCode and GeeksforGeeks, plus CSES and AtCoder challenge suites.
+- **Revision Queue & Bookmarks**: Flag problems that need spaced repetition revisit. Maintain a custom list of bookmarked questions for quick reference before interview rounds.
+- **Instant Search & Topic Filters**: Find problems by name, platform, pattern, or difficulty tag in real-time.
+- **Local-First Privacy**: Progress is stored locally in your browser — no mandatory login, cookies, or cloud telemetry.
+- **Responsive & Modern UI**: Built with React 19, Tailwind CSS v4, Lucide icons, and Radix UI components with complete Dark/Light mode support.
 
 ---
 
-## Detailed Learning Roadmap
+## 🗺️ Detailed Learning Roadmap
 
-The learning path consists of 22 structured topic modules divided into three tiers:
+The curriculum is structured into 3 comprehensive tiers:
+
+```
+Foundation (Phases 1–8)  ──►  Intermediate (Phases 9–15)  ──►  Advanced (Phases 16–22)
+```
 
 ### Phase 1: Foundation Tier
 
 ```
-[Math & Number Theory] --> [Arrays & Strings] --> [Hashing]
-                                                     |
-                                                     v
-[Sorting] <-- [Prefix Sum] <-- [Sliding Window] <-- [Two Pointers]
+[Math & Number Theory] ──► [Arrays & Strings] ──► [Hashing]
+                                                    │
+                                                    ▼
+[Sorting] ◄── [Prefix Sum] ◄── [Sliding Window] ◄── [Two Pointers]
 ```
 
-1. **Math & Number Theory**: Prime factorization, Greatest Common Divisor (GCD), Modular Exponentiation, Sieve of Eratosthenes, and digit manipulation.
-2. **Arrays**: Subarray logic, Kadane's algorithm, in-place rotations, interval manipulation, and missing number techniques.
-3. **Strings**: Palindrome checks, string parsing, frequency arrays, and string transformation patterns.
-4. **Hashing**: HashMap and HashSet fundamentals, subsegment sums, frequency counting, and cache design logic.
-5. **Two Pointers**: Opposite-end pointers, fast and slow pointer strategies, and sorted array pair/triplet search.
-6. **Sliding Window**: Fixed and variable window techniques, sliding window max/min, and frequency hashmap windows.
-7. **Prefix Sum**: Range sum queries, 2D matrix prefix sums, difference array techniques, and subsegment matching.
-8. **Sorting**: Implementation of Bubble, Selection, Insertion, Merge, Quick, Heap, and Counting Sort, custom comparators, and QuickSelect.
+1. **Math & Number Theory**: Prime factorization, Greatest Common Divisor (GCD/Euclidean), Modular Exponentiation, Sieve of Eratosthenes, and digit manipulation.
+2. **Arrays**: In-place rotations, Kadane's algorithm, Dutch National Flag, interval manipulation, and missing number techniques.
+3. **Strings**: Palindromes, anagrams, frequency arrays, character parsing, and string transformations.
+4. **Hashing**: HashMap & HashSet internals, two-sum variations, subarray sum equals K, frequency counting, and cache patterns.
+5. **Two Pointers**: Opposite-end pointers, fast & slow pointer strategy (Floyd's cycle), and sorted pair/triplet discovery.
+6. **Sliding Window**: Fixed and dynamic window techniques, sliding window minimum/maximum, and hashmap-based variable windows.
+7. **Prefix Sum & Difference Arrays**: 1D/2D range sum queries, difference array interval updates, and subsegment matching.
+8. **Sorting**: Bubble, Selection, Insertion, Merge, Quick, Heap, and Counting Sort, custom comparators, and QuickSelect.
+
+---
 
 ### Phase 2: Intermediate Tier
 
 ```
-[Linked Lists] --> [Stack & Queue] --> [Binary Search]
-                                              |
-                                              v
-[Greedy] <-- [Heaps / Priority Queues] <-- [Trees & BST] <-- [Backtracking]
+[Linked Lists] ──► [Stack & Queue] ──► [Binary Search]
+                                              │
+                                              ▼
+[Greedy] ◄── [Heaps / Priority Queue] ◄── [Trees & BST] ◄── [Backtracking]
 ```
 
-9. **Linked Lists**: Single, double, and circular list operations, cycle detection (Floyd's algorithm), in-place reversal, and list merging.
-10. **Stack & Queue**: LIFO and FIFO implementations, monotonic stack pattern (Next Greater Element), expression evaluation, and circular queues.
-11. **Binary Search**: Index search, search space halving, search-on-answer optimization pattern, and rotated sorted array variants.
-12. **Recursion & Backtracking**: Recursive call stacks, decision trees, subsets, permutations, N-Queens, Sudoku solving, and grid path exploration.
-13. **Trees & Binary Search Trees**: Traversals (Pre/In/Post/Level), tree height/diameter, boundary/view traversals, BST validation, and Lowest Common Ancestor (LCA).
-14. **Heap / Priority Queue**: Min-heap and max-heap implementations, Top-K frequent elements pattern, two-heap median tracking, and K-way merging.
-15. **Greedy Algorithms**: Interval scheduling, activity selection, jump games, fractional knapsack, and exchange argument proofs.
+9. **Linked Lists**: Singly, doubly, and circular linked lists, cycle detection, in-place reversal, and K-group reversal.
+10. **Stack & Queue**: Monotonic stack pattern (Next Greater Element), histogram max rectangle, min stack, and circular queue design.
+11. **Binary Search**: Lower/upper bound, rotated array search, search on answer space (allocating pages, painter's partition).
+12. **Recursion & Backtracking**: Recursion tree tracing, subsets, permutations, combinations, N-Queens, Sudoku solver, and grid exploration.
+13. **Trees & Binary Search Trees**: Pre/In/Post/Level order traversals, height & diameter, view algorithms (top, bottom, left, right), LCA, BST validation, and balanced BST operations.
+14. **Heap / Priority Queue**: Min-heap and max-heap implementations, Top-K elements, Median from Data Stream (two heaps), and K-way merge.
+15. **Greedy Algorithms**: Interval scheduling, activity selection, fractional knapsack, gas station tour, and exchange argument reasoning.
+
+---
 
 ### Phase 3: Advanced Tier
 
 ```
-[Graphs] --> [Dynamic Programming] --> [Trie (Prefix Tree)]
-                                            |
-                                            v
-[Segment & Fenwick Trees] <-- [String Algorithms] <-- [Matrix / Bitmasking]
+[Graphs] ──► [Dynamic Programming] ──► [Trie (Prefix Tree)]
+                                             │
+                                             ▼
+[Segment & Fenwick Trees] ◄── [String Algorithms] ◄── [Matrix / Bitmasking]
 ```
 
-16. **Graphs (BFS/DFS & Node-Based)**: Adjacency representations, Bipartite graphs, Topological Sorting, Cycle detection, Dijkstra, Bellman-Ford, Floyd-Warshall, Prim/Kruskal MST, DSU, and Tarjan's SCC.
-17. **Dynamic Programming**: 1D DP, 2D Grid DP, 0/1 Knapsack, Unbounded Knapsack, Longest Increasing Subsequence (LIS), Longest Common Subsequence (LCS), Palindromic DP, Matrix Chain Multiplication, Tree DP, Bitmask DP, and Digit DP.
-18. **Trie (Prefix Tree)**: Prefix insertion, autocomplete search, prefix/suffix matching, and maximum XOR pair search.
-19. **Bit Manipulation**: Bitwise AND/OR/XOR/NOT, single number patterns, subset generation via bitmasks, and bitmask DP states.
-20. **Matrix / 2D Grid**: In-place rotations, spiral matrix traversal, 2D prefix sums, and grid search optimizations.
-21. **String Algorithms**: Knuth-Morris-Pratt (KMP), Z-algorithm, Rabin-Karp rolling hash, and Manacher's algorithm for palindromes.
-22. **Segment Tree & Fenwick Tree**: Binary Indexed Trees (BIT), Segment Tree point and range updates, range minimum/maximum queries, and lazy propagation.
+16. **Graphs (BFS, DFS, & Connectivity)**: Adjacency structures, bipartite testing, topological sort (Kahn's), cycle detection, Dijkstra, Bellman-Ford, Floyd-Warshall, Prim & Kruskal MST, Disjoint Set Union (DSU), and Tarjan's Strongly Connected Components (SCC).
+17. **Dynamic Programming (DP)**: 1D linear DP, 2D Grid DP, 0/1 Knapsack, Unbounded Knapsack, Longest Common Subsequence (LCS), Longest Increasing Subsequence (LIS), Matrix Chain Multiplication (MCM), Palindromic DP, Tree DP, Bitmask DP, and Digit DP.
+18. **Trie (Prefix Tree)**: Prefix matching, autocomplete, wildcards, bitwise XOR maximum pair search.
+19. **Bit Manipulation**: Bitwise operations, single number extraction, subset generation via bitmasks, counting set bits (Kernighan's), and state compression.
+20. **Matrix / 2D Grid**: In-place rotations, spiral matrix, word search in grid, flood fill, and island counting.
+21. **Advanced String Algorithms**: Knuth-Morris-Pratt (KMP), Z-Algorithm, Rabin-Karp rolling hash, and Manacher's algorithm.
+22. **Segment Tree & Fenwick Tree (BIT)**: Point updates, range sum/min/max queries, and lazy propagation.
 
 ---
 
-## Contributing and Community
+## 🏛️ Classical Algorithm Coverage
 
-DSA Studio is built as a community-driven resource. If you find missing problems, incorrect metadata, broken links, or want to suggest new problem patterns, contributions are welcome.
+| Category | Classical Algorithms Included |
+| :--- | :--- |
+| **Shortest Path** | Dijkstra's Algorithm, Bellman-Ford, Floyd-Warshall |
+| **Minimum Spanning Tree** | Kruskal's Algorithm, Prim's Algorithm, Disjoint Set Union (DSU) |
+| **Graph Traversal & SCC** | Breadth-First Search, Depth-First Search, Kahn's Topological Sort, Tarjan's SCC, Kosaraju's Algorithm |
+| **String Matching** | Knuth-Morris-Pratt (KMP), Rabin-Karp Rolling Hash, Z-Algorithm, Manacher's Algorithm |
+| **Optimization & DP** | Kadane's Algorithm, 0/1 Knapsack, Unbounded Knapsack, LIS, LCS, MCM, Bitmask DP |
+| **Range Queries** | Fenwick Tree (Binary Indexed Tree), Segment Tree with Lazy Propagation |
 
-### How to Contribute
+---
 
-If you identify a missing problem or want to add a new GeeksforGeeks / LeetCode problem:
+## 💻 Tech Stack
 
-1. **Fork the Repository**:
-   Click the Fork button at the top right of the GitHub repository page.
+- **Framework**: [TanStack Start](https://tanstack.com/start) with Nitro server runtime
+- **Routing**: [TanStack Router](https://tanstack.com/router) (file-based, type-safe routes)
+- **Library**: [React 19](https://react.dev/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **UI Components**: [Radix UI](https://www.radix-ui.com/) & [Lucide Icons](https://lucide.dev/)
+- **Bundler & Build Tool**: [Vite](https://vitejs.dev/)
 
-2. **Clone your Fork**:
+---
+
+## 📁 Project Structure
+
+```
+DSA_Studio/
+├── public/                 # Static assets & icons
+├── src/
+│   ├── components/         # Reusable UI components
+│   │   ├── ui/             # Radix-based UI building blocks
+│   │   ├── AppHeader.tsx   # Top navigation header & search bar
+│   │   ├── AppShell.tsx    # Responsive shell layout
+│   │   ├── AppSidebar.tsx  # Topic navigation sidebar
+│   │   ├── LevelAccordion.tsx
+│   │   ├── ProblemTable.tsx
+│   │   └── ProgressBar.tsx
+│   ├── data/               # Curated DSA problem catalogs
+│   │   ├── problems.ts     # Main dataset & types
+│   │   ├── dsa-topics.ts   # Core topic definitions
+│   │   ├── remaining-topics.ts
+│   │   ├── roadmap.ts      # Topic roadmap hierarchy
+│   │   └── roadmap-additions.ts
+│   ├── hooks/              # Custom React hooks
+│   ├── lib/                # Contexts, stores, theme, & utilities
+│   │   ├── progress-store.ts # LocalStorage progress sync
+│   │   ├── search-context.ts
+│   │   └── theme.ts
+│   ├── routes/             # TanStack file-based routes
+│   │   ├── __root.tsx      # App shell layout route
+│   │   ├── index.tsx       # Dashboard
+│   │   ├── practice.tsx    # Practice catalog
+│   │   ├── bookmarks.tsx   # Saved problems
+│   │   ├── revision.tsx    # Spaced repetition queue
+│   │   ├── progress.tsx    # Analytics & completion stats
+│   │   └── topics.$slug.tsx# Individual topic view
+│   ├── router.tsx          # Router instantiation
+│   └── styles.css          # Global styling & Tailwind rules
+├── package.json
+├── tsconfig.json
+└── vite.config.ts
+```
+
+---
+
+## ⚡ Getting Started
+
+### Prerequisites
+
+- **Node.js**: `v20.x` or higher
+- Package manager: `npm`, `bun`, or `pnpm`
+
+### Installation & Local Run
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/KanishJebaMathewM/DSA_Studio.git
+   cd DSA_Studio
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   # or
+   bun install
+   ```
+
+3. **Start the development server:**
+   ```bash
+   npm run dev
+   # or
+   bun dev
+   ```
+
+4. **Open in your browser:**
+   Navigate to `http://localhost:3000` (or the port indicated in terminal).
+
+### Available Scripts
+
+| Script | Purpose |
+| :--- | :--- |
+| `npm run dev` | Starts the Vite development server with hot-reload |
+| `npm run build` | Builds the client and server output for production |
+| `npm run preview` | Previews the production build locally |
+| `npm run lint` | Runs ESLint across the codebase |
+| `npm run format` | Formats all files using Prettier |
+
+---
+
+## 🚀 Deployment
+
+### Vercel Deployment
+
+1. Import the repository into your Vercel Dashboard.
+2. Configure project settings:
+   - **Framework Preset**: Other / Vite
+   - **Root Directory**: `./`
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `.output/public`
+3. Click **Deploy**.
+
+---
+
+## 🤝 Contributing
+
+Contributions are warmly welcomed! Whether you want to add new curated problems, fix broken problem links, enhance problem descriptions, or improve the UI, here is how you can get started:
+
+### Adding New Problems
+
+1. **Fork the repository** on GitHub.
+2. **Clone your fork** locally:
    ```bash
    git clone https://github.com/YOUR_USERNAME/DSA_Studio.git
    cd DSA_Studio
    ```
-
-3. **Add or Modify Problems**:
-   - Open `src/data/problems.ts`, `src/data/dsa-topics.ts`, or `src/data/remaining-topics.ts`.
-   - Add the problem entry with valid metadata:
-     - `id`: Unique slug
-     - `title`: Problem title
-     - `url`: Direct LeetCode or GeeksforGeeks link
-     - `platform`: `"LeetCode"` or `"GFG"`
-     - `difficulty`: `"Easy"`, `"Medium"`, or `"Hard"`
-   - Reference the problem ID under the corresponding topic level.
-
-4. **Commit your Changes**:
-   ```bash
-   git commit -m "Add [Problem Name] to [Topic Slug]"
+3. **Edit the problem catalogs** in `src/data/problems.ts` or `src/data/dsa-topics.ts`:
+   ```typescript
+   p(
+     "unique-problem-slug",
+     "Problem Title",
+     "https://leetcode.com/problems/your-problem-slug/",
+     "LeetCode", // or "GFG" / "CSES" / "AtCoder"
+     "Medium"    // "Easy" | "Medium" | "Hard"
+   )
    ```
+4. **Test your changes** locally:
+   ```bash
+   npm run build
+   npm run lint
+   ```
+5. **Commit and push** to your fork:
+   ```bash
+   git checkout -b feat/add-topic-problems
+   git commit -m "feat: add [Problem Name] to [Topic]"
+   git push origin feat/add-topic-problems
+   ```
+6. **Open a Pull Request** to the `main` branch of `https://github.com/KanishJebaMathewM/DSA_Studio`.
 
-5. **Submit a Pull Request**:
-   Push the changes to your fork and submit a Pull Request (PR) to the `main` branch of the official repository:
-   `https://github.com/KanishJebaMathewM/DSA_Studio`
-
----
-
-## Project Setup and Deployment
-
-### Local Development Setup
-
-To run the application locally:
-
-```bash
-# Clone repository
-git clone https://github.com/KanishJebaMathewM/DSA_Studio.git
-cd DSA_Studio
-
-# Install dependencies
-npm install
-
-# Start local server
-npm run dev
-```
-
-### Building for Production
-
-```bash
-npm run build
-```
-
-### Vercel Deployment
-
-When deploying to Vercel:
-- Set **Root Directory** to `./`
-- Set **Build Command** to `npm run build`
-- Set **Output Directory** to `.output/public`
+> 💡 **Tip:** Have questions or want to discuss an idea before opening a PR? Join our [Discord community](https://discord.gg/7MhyE48Au) and talk directly with the maintainers and contributors!
 
 ---
 
-## Technical Stack Summary
+## 💬 Community & Discussion
 
-DSA Studio is built using TanStack Start (`@tanstack/react-start`), TanStack Router, React 19, TypeScript, Tailwind CSS, Radix UI, Vite, and Nitro.
+Join our growing community of developers, competitive programmers, and open-source contributors!
+
+<div align="center">
+
+[![Discord Banner](https://img.shields.io/badge/Discord-Connect%20on%20Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/7MhyE48Au)
+
+</div>
+
+- **Discord Server:** [https://discord.gg/7MhyE48Au](https://discord.gg/7MhyE48Au)
+- **What we do on Discord:**
+  - 💬 **DSA & Algorithm Discussion:** Clarify algorithmic intuition, discuss time/space complexity, and solve tricky edge cases together.
+  - 🛠️ **Project Collaboration:** Discuss DSA Studio's roadmap, request new features, report bugs, and coordinate pull requests.
+  - 🌐 **Open-Source Networking:** Share, discuss, and collaborate on other open-source projects, developer tools, and portfolios.
+  - 💼 **Interview & Coding Contest Prep:** Discuss active LeetCode, Codeforces, and AtCoder contests and share technical interview experiences.
+- **GitHub Discussions & Issues:** [GitHub Issues](https://github.com/KanishJebaMathewM/DSA_Studio/issues)
+- **Repository:** [https://github.com/KanishJebaMathewM/DSA_Studio](https://github.com/KanishJebaMathewM/DSA_Studio)
 
 ---
 
-## License
+## 📄 License
 
-This project is licensed under the MIT License.
+This project is licensed under the [MIT License](LICENSE) — see the LICENSE file for details.
