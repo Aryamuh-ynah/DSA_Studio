@@ -18,6 +18,12 @@ export type ProgressMap = Record<string, ProgressEntry>;
 
 const STORAGE_KEY = "dsa-sheet-progress-v1";
 
+const EMPTY_MAP: ProgressMap = Object.freeze({});
+
+function getServerSnapshot(): ProgressMap {
+  return EMPTY_MAP;
+}
+
 const listeners = new Set<() => void>();
 let cache: ProgressMap | null = null;
 
@@ -26,13 +32,24 @@ function isBrowser(): boolean {
 }
 
 function read(): ProgressMap {
-  if (!isBrowser()) return {};
+  if (!isBrowser()) return EMPTY_MAP;
   if (cache) return cache;
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    cache = raw ? (JSON.parse(raw) as ProgressMap) : {};
+    if (!raw) return (cache = EMPTY_MAP);
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+      return (cache = EMPTY_MAP);
+    }
+    const normalized: ProgressMap = {};
+    for (const [id, entry] of Object.entries(parsed)) {
+      if (entry && typeof entry === "object" && !Array.isArray(entry)) {
+        normalized[id] = { ...defaultEntry(), ...(entry as ProgressEntry) };
+      }
+    }
+    cache = normalized;
   } catch {
-    cache = {};
+    cache = EMPTY_MAP;
   }
   return cache;
 }
@@ -61,7 +78,8 @@ export function defaultEntry(): ProgressEntry {
 }
 
 export function getEntry(id: string): ProgressEntry {
-  return read()[id] ?? defaultEntry();
+  const entry = read()[id];
+  return entry ? { ...defaultEntry(), ...entry } : defaultEntry();
 }
 
 export function getAllProgress(): ProgressMap {
@@ -70,7 +88,7 @@ export function getAllProgress(): ProgressMap {
 
 function update(id: string, patch: Partial<ProgressEntry>): void {
   const current = read();
-  const existing = current[id] ?? defaultEntry();
+  const existing = current[id] ? { ...defaultEntry(), ...current[id] } : defaultEntry();
   const next: ProgressMap = { ...current, [id]: { ...existing, ...patch } };
   write(next);
 }
@@ -109,10 +127,11 @@ function subscribe(cb: () => void): () => void {
 
 // Hook: subscribe components to progress changes.
 export function useProgress(): ProgressMap {
-  return useSyncExternalStore(subscribe, read, () => ({}));
+  return useSyncExternalStore(subscribe, read, getServerSnapshot);
 }
 
 export function useProgressEntry(id: string): ProgressEntry {
   const all = useProgress();
-  return all[id] ?? defaultEntry();
+  const entry = all[id];
+  return entry ? { ...defaultEntry(), ...entry } : defaultEntry();
 }
