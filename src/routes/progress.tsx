@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AppShell } from "@/components/AppShell";
 import { ProgressBar } from "@/components/ProgressBar";
@@ -7,6 +8,7 @@ import {
   UNIQUE_PROBLEM_IDS,
 } from "@/data/problems";
 import { useProgress } from "@/lib/progress-store";
+import { useGlobalSearch } from "@/lib/search-context";
 
 export const Route = createFileRoute("/progress")({
   head: () => ({
@@ -49,10 +51,23 @@ function ProgressPage() {
   const medium = byDifficulty("Medium");
   const hard = byDifficulty("Hard");
 
+  const { query, setQuery } = useGlobalSearch();
+  const q = query.trim().toLowerCase();
+
   const topicRows = TOPICS.map((t) => ({
     topic: t,
     ...topicStats(t.slug, progress),
   }));
+
+  const filteredTopicRows = useMemo(() => {
+    if (!q) return topicRows;
+    return topicRows.filter(
+      (r) =>
+        r.topic.name.toLowerCase().includes(q) ||
+        r.topic.short.toLowerCase().includes(q) ||
+        r.topic.slug.toLowerCase().includes(q),
+    );
+  }, [topicRows, q]);
 
   const strongest = [...topicRows].sort((a, b) => b.pct - a.pct).slice(0, 3);
   const weakest = [...topicRows]
@@ -101,24 +116,53 @@ function ProgressPage() {
 
       <div className="mt-6 grid gap-4 lg:grid-cols-3">
         <div className="lg:col-span-2 rounded-lg border bg-surface p-5">
-          <h3 className="text-sm font-semibold">Topic progress</h3>
+          <div className="flex items-center justify-between">
+            <h3 className="text-sm font-semibold">Topic progress</h3>
+            {q && (
+              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                <span>
+                  {filteredTopicRows.length} of {topicRows.length} topics
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setQuery("")}
+                  className="font-medium text-primary hover:underline"
+                >
+                  Clear
+                </button>
+              </div>
+            )}
+          </div>
           <div className="mt-3 space-y-3">
-            {topicRows.map((r) => (
-              <Link
-                key={r.topic.slug}
-                to="/topics/$slug"
-                params={{ slug: r.topic.slug }}
-                className="block"
-              >
-                <div className="flex items-center justify-between text-sm">
-                  <span className="font-medium text-foreground">{r.topic.name}</span>
-                  <span className="text-xs text-muted-foreground">
-                    {r.solved} / {r.total} • {r.pct}%
-                  </span>
-                </div>
-                <ProgressBar value={r.pct} className="mt-1.5" />
-              </Link>
-            ))}
+            {filteredTopicRows.length === 0 ? (
+              <div className="py-6 text-center text-xs text-muted-foreground">
+                No topics match "{query}".{" "}
+                <button
+                  type="button"
+                  onClick={() => setQuery("")}
+                  className="font-medium text-primary hover:underline"
+                >
+                  Clear search
+                </button>
+              </div>
+            ) : (
+              filteredTopicRows.map((r) => (
+                <Link
+                  key={r.topic.slug}
+                  to="/topics/$slug"
+                  params={{ slug: r.topic.slug }}
+                  className="block"
+                >
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="font-medium text-foreground">{r.topic.name}</span>
+                    <span className="text-xs text-muted-foreground">
+                      {r.solved} / {r.total} • {r.pct}%
+                    </span>
+                  </div>
+                  <ProgressBar value={r.pct} className="mt-1.5" />
+                </Link>
+              ))
+            )}
           </div>
         </div>
 
