@@ -50,7 +50,7 @@ function RevisionPage() {
           description="You're caught up with your revision list."
         />
       ) : (
-        <ProblemTable rows={rows} />
+        <ProblemTable rows={rows} showNotes />
       )}
     </AppShell>
   );

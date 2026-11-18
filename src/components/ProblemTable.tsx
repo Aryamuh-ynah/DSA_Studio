@@ -2,7 +2,8 @@ import { Bookmark, Check, ExternalLink, RotateCcw } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { DifficultyBadge } from "./DifficultyBadge";
 import { PlatformBadge } from "./PlatformBadge";
-import { progressRepo, useProgress } from "@/lib/progress-store";
+import { ProblemNotes } from "./ProblemNotes";
+import { hasNotes, progressRepo, useProgress } from "@/lib/progress-store";
 import type { Problem } from "@/data/problems";
 
 export interface ProblemTableRow {
@@ -10,7 +11,14 @@ export interface ProblemTableRow {
   pattern?: string; // optional level/category name
 }
 
-export function ProblemTable({ rows }: { rows: ProblemTableRow[] }) {
+export function ProblemTable({
+  rows,
+  showNotes = false,
+}: {
+  rows: ProblemTableRow[];
+  /** Show a short preview of each problem's notes under its title. */
+  showNotes?: boolean;
+}) {
   const progress = useProgress();
 
   if (rows.length === 0) return null;
@@ -63,22 +71,34 @@ export function ProblemTable({ rows }: { rows: ProblemTableRow[] }) {
                       {done && (
                         <Check className="h-3.5 w-3.5 text-success" />
                       )}
-                      <button
-                        aria-label="Toggle bookmark"
-                        onClick={() => progressRepo.toggleBookmarked(problem.id)}
-                        className={`ml-auto opacity-0 transition-opacity group-hover:opacity-100 ${
-                          bookmarked ? "opacity-100" : ""
-                        }`}
-                      >
-                        <Bookmark
-                          className={`h-3.5 w-3.5 ${
-                            bookmarked
-                              ? "fill-gold text-gold"
-                              : "text-muted-foreground hover:text-foreground"
-                          }`}
+                      <div className="ml-auto flex items-center gap-2">
+                        <ProblemNotes
+                          problemId={problem.id}
+                          problemTitle={problem.title}
+                          variant="desktop"
                         />
-                      </button>
+                        <button
+                          aria-label="Toggle bookmark"
+                          onClick={() => progressRepo.toggleBookmarked(problem.id)}
+                          className={`opacity-0 transition-opacity group-hover:opacity-100 ${
+                            bookmarked ? "opacity-100" : ""
+                          }`}
+                        >
+                          <Bookmark
+                            className={`h-3.5 w-3.5 ${
+                              bookmarked
+                                ? "fill-gold text-gold"
+                                : "text-muted-foreground hover:text-foreground"
+                            }`}
+                          />
+                        </button>
+                      </div>
                     </div>
+                    {showNotes && hasNotes(entry?.notes) && (
+                      <p className="mt-1 line-clamp-2 whitespace-pre-line text-xs text-muted-foreground">
+                        {entry!.notes}
+                      </p>
+                    )}
                   </td>
                   <td className="px-3 py-2 align-middle">
                     <DifficultyBadge difficulty={problem.difficulty} />
@@ -147,8 +167,18 @@ export function ProblemTable({ rows }: { rows: ProblemTableRow[] }) {
                   <DifficultyBadge difficulty={problem.difficulty} />
                   <PlatformBadge platform={problem.platform} />
                 </div>
+                {showNotes && hasNotes(entry?.notes) && (
+                  <p className="mt-1.5 line-clamp-2 whitespace-pre-line text-xs text-muted-foreground">
+                    {entry!.notes}
+                  </p>
+                )}
               </div>
               <div className="flex flex-col items-end gap-1">
+                <ProblemNotes
+                  problemId={problem.id}
+                  problemTitle={problem.title}
+                  variant="mobile"
+                />
                 <button onClick={() => progressRepo.toggleBookmarked(problem.id)}>
                   <Bookmark
                     className={`h-4 w-4 ${
