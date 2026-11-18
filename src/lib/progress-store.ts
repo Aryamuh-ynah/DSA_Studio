@@ -25,8 +25,17 @@ function isBrowser(): boolean {
   return typeof window !== "undefined" && typeof localStorage !== "undefined";
 }
 
+// React requires snapshot functions to return the same reference until the
+// data actually changes, so the server/empty snapshot must be a single
+// shared object rather than a fresh `{}` per call.
+const EMPTY_PROGRESS: ProgressMap = Object.freeze({}) as ProgressMap;
+
+function getServerSnapshot(): ProgressMap {
+  return EMPTY_PROGRESS;
+}
+
 function read(): ProgressMap {
-  if (!isBrowser()) return {};
+  if (!isBrowser()) return EMPTY_PROGRESS;
   if (cache) return cache;
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
@@ -109,7 +118,7 @@ function subscribe(cb: () => void): () => void {
 
 // Hook: subscribe components to progress changes.
 export function useProgress(): ProgressMap {
-  return useSyncExternalStore(subscribe, read, () => ({}));
+  return useSyncExternalStore(subscribe, read, getServerSnapshot);
 }
 
 export function useProgressEntry(id: string): ProgressEntry {
