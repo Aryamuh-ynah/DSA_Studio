@@ -6,7 +6,7 @@
  * Verifies that updating progress preserves sibling entries, maintains backward
  * compatibility with partial legacy entries, and never erases user data.
  *
- * Run with: node tests/data-safety.test.mjs
+ * Run with: node tests/data-safety.test.mjs (Requires Node.js v22.6+ for native TS stripping, or Bun)
  */
 
 import assert from "node:assert/strict";
@@ -179,14 +179,22 @@ test("progressRepo.toggleNeedsRevision() on an unseeded problem initializes safe
   assert.equal(e001.completed, true, "prob-001 still intact after adding new problem");
 });
 
-// Test 8: Underlying localStorage key is verified as production key
-test("production store writes to the exact key 'dsa-sheet-progress-v1'", () => {
+// Test 8: Underlying localStorage key is verified as production key and persists serialization
+test("production store writes to the exact key 'dsa-sheet-progress-v1' and preserves serialization", () => {
   const raw = mockLocalStorage.getItem("dsa-sheet-progress-v1");
   assert.ok(raw, "dsa-sheet-progress-v1 must exist in localStorage");
 
   const parsed = JSON.parse(raw);
   assert.ok(parsed["prob-001"], "stored JSON must contain prob-001");
+  assert.equal(parsed["prob-001"].notes, "Updated note for binary search variant");
+  assert.equal(parsed["prob-001"].completed, true);
+
+  assert.ok(parsed["prob-004"], "stored JSON must contain unchanged sibling prob-004");
+  assert.equal(parsed["prob-004"].notes, "Try again later");
+  assert.equal(parsed["prob-004"].bookmarked, false); // toggled in Test 6
+
   assert.ok(parsed["prob-new-999"], "stored JSON must contain newly added prob-new-999");
+  assert.equal(parsed["prob-new-999"].needsRevision, true);
 });
 
 // ============================================================
@@ -194,3 +202,4 @@ console.log(`\n📊 Results: ${passed} passed, ${failed} failed\n`);
 if (failed > 0) {
   process.exit(1);
 }
+

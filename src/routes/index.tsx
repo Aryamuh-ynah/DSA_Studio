@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, BookOpenCheck, CheckCircle2, ListTodo, RotateCcw } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
@@ -39,6 +39,7 @@ export const Route = createFileRoute("/")({
 function Dashboard() {
   const progress = useProgress();
   const { query, setQuery } = useGlobalSearch();
+  const [showAllProblems, setShowAllProblems] = useState(false);
   const q = query.trim().toLowerCase();
 
   const total = UNIQUE_PROBLEM_IDS.length;
@@ -92,12 +93,10 @@ function Dashboard() {
       if (
         pr.title.toLowerCase().includes(q) ||
         pl.topicName.toLowerCase().includes(q) ||
-        pl.levelTitle.toLowerCase().includes(q) ||
-        pr.difficulty.toLowerCase().includes(q)
+        pl.levelTitle.toLowerCase().includes(q)
       ) {
         seen.add(pl.problemId);
         problems.push({ placement: pl, problem: pr });
-        if (problems.length >= 10) break;
       }
     }
 
@@ -170,7 +169,10 @@ function Dashboard() {
                     Problems ({searchResults.problems.length})
                   </h3>
                   <div className="divide-y rounded-lg border bg-surface">
-                    {searchResults.problems.map(({ placement, problem }) => (
+                    {(showAllProblems
+                      ? searchResults.problems
+                      : searchResults.problems.slice(0, 10)
+                    ).map(({ placement, problem }) => (
                       <Link
                         key={`${placement.topicSlug}-${problem.id}`}
                         to="/topics/$slug"
@@ -192,6 +194,20 @@ function Dashboard() {
                       </Link>
                     ))}
                   </div>
+                  {searchResults.problems.length > 10 && (
+                    <div className="mt-3 text-center">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => setShowAllProblems((prev) => !prev)}
+                        className="text-xs text-muted-foreground hover:text-foreground"
+                      >
+                        {showAllProblems
+                          ? "Show fewer"
+                          : `Show all ${searchResults.problems.length} matching problems`}
+                      </Button>
+                    </div>
+                  )}
                 </div>
               )}
             </div>

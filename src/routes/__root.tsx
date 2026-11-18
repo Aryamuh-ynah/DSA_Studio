@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -12,7 +13,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting"; // neutral console reporter
 import { SearchProvider } from "@/lib/search-context";
-import { SidebarProvider } from "@/components/ui/sidebar";
+import { SidebarProvider, useSidebar } from "@/components/ui/sidebar";
 
 function NotFoundComponent() {
   return (
@@ -130,6 +131,19 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+function MobileSidebarCloser() {
+  const pathname = useRouterState({ select: (r) => r.location.pathname });
+  const { setOpenMobile, isMobile } = useSidebar();
+
+  useEffect(() => {
+    if (isMobile) {
+      setOpenMobile(false);
+    }
+  }, [pathname, isMobile, setOpenMobile]);
+
+  return null;
+}
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
@@ -137,6 +151,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <SearchProvider>
         <SidebarProvider>
+          <MobileSidebarCloser />
           {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
           <Outlet />
         </SidebarProvider>

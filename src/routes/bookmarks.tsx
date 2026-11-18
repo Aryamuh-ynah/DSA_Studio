@@ -24,17 +24,18 @@ function BookmarksPage() {
   const { query, setQuery } = useGlobalSearch();
   const q = query.trim().toLowerCase();
 
-  const totalBookmarkedCount = Object.values(progress).filter((e) => e.bookmarked).length;
-
   const seen = new Set<string>();
   const rows: ProblemTableRow[] = [];
+  let totalBookmarkedCount = 0;
+
   for (const pl of ALL_PLACEMENTS) {
     if (seen.has(pl.problemId)) continue;
     if (!progress[pl.problemId]?.bookmarked) continue;
     const pr = PROBLEM_MAP[pl.problemId];
     if (!pr) continue;
-    if (q && !pr.title.toLowerCase().includes(q)) continue;
     seen.add(pl.problemId);
+    totalBookmarkedCount++;
+    if (q && !pr.title.toLowerCase().includes(q)) continue;
     rows.push({ problem: pr, pattern: `${pl.topicName} • ${pl.levelTitle}` });
   }
 

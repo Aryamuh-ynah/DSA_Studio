@@ -65,6 +65,7 @@ function ProgressPage() {
       (r) =>
         r.topic.name.toLowerCase().includes(q) ||
         r.topic.short.toLowerCase().includes(q) ||
+        r.topic.description.toLowerCase().includes(q) ||
         r.topic.slug.toLowerCase().includes(q),
     );
   }, [topicRows, q]);

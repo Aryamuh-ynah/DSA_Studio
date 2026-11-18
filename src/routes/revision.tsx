@@ -24,18 +24,19 @@ function RevisionPage() {
   const { query, setQuery } = useGlobalSearch();
   const q = query.trim().toLowerCase();
 
-  const totalRevisionCount = Object.values(progress).filter((e) => e.needsRevision).length;
-
   const ids = new Set<string>();
   const rows: ProblemTableRow[] = [];
+  let totalRevisionCount = 0;
+
   for (const pl of ALL_PLACEMENTS) {
     if (ids.has(pl.problemId)) continue;
     if (!progress[pl.problemId]?.needsRevision) continue;
     const pr = PROBLEM_MAP[pl.problemId];
     if (!pr) continue;
+    ids.add(pl.problemId);
+    totalRevisionCount++;
     if (q && !pr.title.toLowerCase().includes(q) && !pl.topicName.toLowerCase().includes(q))
       continue;
-    ids.add(pl.problemId);
     rows.push({ problem: pr, pattern: `${pl.topicName} • ${pl.levelTitle}` });
   }
 

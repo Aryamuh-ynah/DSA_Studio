@@ -36,7 +36,18 @@ function read(): ProgressMap {
   if (cache) return cache;
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    cache = raw ? (JSON.parse(raw) as ProgressMap) : EMPTY_MAP;
+    if (!raw) return (cache = EMPTY_MAP);
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+      return (cache = EMPTY_MAP);
+    }
+    const normalized: ProgressMap = {};
+    for (const [id, entry] of Object.entries(parsed)) {
+      if (entry && typeof entry === "object" && !Array.isArray(entry)) {
+        normalized[id] = { ...defaultEntry(), ...(entry as ProgressEntry) };
+      }
+    }
+    cache = normalized;
   } catch {
     cache = EMPTY_MAP;
   }
