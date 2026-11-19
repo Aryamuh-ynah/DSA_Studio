@@ -1,0 +1,85 @@
+name: Community Automation
+
+on:
+  issues:
+    types: [opened]
+  pull_request_target:
+    types: [opened, closed]
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  issue-handler:
+    name: Check Issue Proof of Reference
+    if: github.event_name == 'issues' && github.event.action == 'opened'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Request media/proof if missing
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const author = issue.user.login;
+            const body = issue.body || '';
+
+            // Check if body contains images, videos, or common media/proof links
+            const mediaRegex = /(!\[.*?\]\(.*?\)|<img\s+.*?|<video\s+.*?|github\.com\/.*?\/assets\/|user-images\.githubusercontent\.com|\.(png|jpe?g|gif|webp|svg|mp4|mov|webm|avi)(\?.*)?\b|loom\.com|youtube\.com|youtu\.be|drive\.google\.com|vimeo\.com|streamable\.com)/i;
+
+            const hasMedia = mediaRegex.test(body);
+
+            if (!hasMedia) {
+              const comment = `Hi @${author}, thank you for opening this issue! 👋\n\nTo help us understand, reproduce, and resolve this faster, could you please attach a **proof of reference** (such as a screenshot, screen recording / video, or reproduction link) showing the issue?\n\nYou can simply drag and drop images or videos directly into this issue. Thank you!`;
+
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: comment
+              });
+            }
+
+  pr-handler:
+    name: PR Welcome and Merge Thank You
+    if: github.event_name == 'pull_request_target'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Handle PR opened or merged
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            const author = pr.user.login;
+            const action = context.payload.action;
+
+            if (action === 'opened') {
+              // Check if first-time contributor
+              const authorAssociation = pr.author_association;
+              const isFirstTimer = authorAssociation === 'FIRST_TIME_CONTRIBUTOR' || authorAssociation === 'FIRST_TIMER';
+
+              let welcomeMsg = '';
+              if (isFirstTimer) {
+                welcomeMsg = `### 🎉 Welcome to DSA Studio, @${author}!\n\nThank you for making your very first pull request here! We're excited to have you contribute to the project. 🚀\n\n`;
+              } else {
+                welcomeMsg = `### 👋 Hi @${author}!\n\nThank you for opening this pull request!\n\n`;
+              }
+
+              welcomeMsg += `Please wait while the maintainer (@KanishJebaMathewM) reviews your work. In the meantime, please make sure all checks pass and your code adheres to the project guidelines.\n\nThank you for your patience and contribution! ✨`;
+
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: pr.number,
+                body: welcomeMsg
+              });
+            } else if (action === 'closed' && pr.merged) {
+              const mergedMsg = `### 🎉 Congratulations @${author}!\n\nYour pull request has been successfully merged! Thank you so much for contributing to **DSA Studio**. 🚀\n\n- ⭐ If you find this project helpful, please consider **giving this repository a star**!\n- 🤝 Follow [@KanishJebaMathewM](https://github.com/KanishJebaMathewM) to stay connected and discover future projects.\n\nKeep up the great work! ✨`;
+
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: pr.number,
+                body: mergedMsg
+              });
+            }
