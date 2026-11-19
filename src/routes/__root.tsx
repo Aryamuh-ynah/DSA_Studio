@@ -14,6 +14,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting"; // neutral console reporter
 import { SearchProvider } from "@/lib/search-context";
 import { SidebarProvider, useSidebar } from "@/components/ui/sidebar";
+import { Analytics } from "@vercel/analytics/react";
 
 function NotFoundComponent() {
   return (
@@ -154,6 +155,7 @@ function RootComponent() {
           <MobileSidebarCloser />
           {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
           <Outlet />
+          <Analytics />
         </SidebarProvider>
       </SearchProvider>
     </QueryClientProvider>
