@@ -92,6 +92,10 @@ export function getAllProgress(): ProgressMap {
 }
 
 function update(id: string, patch: Partial<ProgressEntry>): void {
+  // Re-read from storage before writing so we build on the latest data,
+  // not a stale in-memory copy. Otherwise a write from this tab could
+  // overwrite changes another tab saved since we last read.
+  cache = null;
   const current = read();
   const existing = current[id] ? { ...defaultEntry(), ...current[id] } : defaultEntry();
   const next: ProgressMap = { ...current, [id]: { ...existing, ...patch } };
@@ -125,9 +129,26 @@ export const progressRepo = {
   },
 };
 
+// The browser fires `storage` in every *other* tab of the same origin when
+// localStorage changes. Drop our cache and re-render so this tab shows the
+// new progress. `key === null` means the other tab called localStorage.clear().
+function onStorage(e: StorageEvent): void {
+  if (e.key !== null && e.key !== STORAGE_KEY) return;
+  cache = null;
+  listeners.forEach((l) => l());
+}
+
 function subscribe(cb: () => void): () => void {
+  if (listeners.size === 0 && isBrowser()) {
+    window.addEventListener("storage", onStorage);
+  }
   listeners.add(cb);
-  return () => listeners.delete(cb);
+  return () => {
+    listeners.delete(cb);
+    if (listeners.size === 0 && isBrowser()) {
+      window.removeEventListener("storage", onStorage);
+    }
+  };
 }
 
 // Hook: subscribe components to progress changes.
