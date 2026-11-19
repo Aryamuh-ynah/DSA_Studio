@@ -82,6 +82,11 @@ export function getEntry(id: string): ProgressEntry {
   return entry ? { ...defaultEntry(), ...entry } : defaultEntry();
 }
 
+/** True when a note contains more than whitespace. */
+export function hasNotes(notes: string | undefined): boolean {
+  return !!notes && notes.trim() !== "";
+}
+
 export function getAllProgress(): ProgressMap {
   return read();
 }

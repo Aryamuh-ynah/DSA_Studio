@@ -78,7 +78,7 @@ function RevisionPage() {
           />
         )
       ) : (
-        <ProblemTable rows={rows} />
+        <ProblemTable rows={rows} showNotes />
       )}
     </AppShell>
   );
