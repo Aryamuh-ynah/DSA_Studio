@@ -287,7 +287,11 @@ function Dashboard() {
                       {nextProblem.title}
                     </div>
                     <div className="mt-1.5 flex items-center gap-2 text-xs text-muted-foreground">
-                      <span>{nextPlacement.levelTitle}</span>
+                      {/* Many levels are simply titled "Easy" / "Medium" / "Hard";
+                          skip those so the title doesn't repeat the badge. */}
+                      {!["Easy", "Medium", "Hard"].includes(nextPlacement.levelTitle) && (
+                        <span>{nextPlacement.levelTitle}</span>
+                      )}
                       <DifficultyBadge difficulty={nextProblem.difficulty} />
                     </div>
                   </div>
