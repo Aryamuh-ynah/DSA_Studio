@@ -19,13 +19,13 @@ import { useGlobalSearch } from "@/lib/search-context";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Dashboard — DSA Sheet" },
+      { title: "Dashboard — DSA Studio" },
       {
         name: "description",
         content:
           "Track your DSA practice progress across graphs, DP, trees, sliding window, and more.",
       },
-      { property: "og:title", content: "DSA Sheet — Practice Tracker" },
+      { property: "og:title", content: "DSA Studio — Practice Tracker" },
       {
         property: "og:description",
         content:
@@ -51,7 +51,9 @@ function Dashboard() {
   const byDifficulty = (d: "Easy" | "Medium" | "Hard") =>
     solvedIds.filter((id) => PROBLEM_MAP[id].difficulty === d).length;
 
-  const revision = Object.entries(progress).filter(([, e]) => e.needsRevision);
+  // Count only problems that still exist in the catalog, so this matches
+  // the Revision page (storage may hold IDs that were since removed).
+  const revisionCount = UNIQUE_PROBLEM_IDS.filter((id) => progress[id]?.needsRevision).length;
 
   // Next unsolved problem (Continue Practicing)
   const nextPlacement = ALL_PLACEMENTS.find(
@@ -252,7 +254,7 @@ function Dashboard() {
             <StatCard label="Remaining" value={remaining} icon={<BookOpenCheck className="h-4 w-4" />} />
             <StatCard
               label="Needs Revision"
-              value={revision.length}
+              value={revisionCount}
               icon={<RotateCcw className="h-4 w-4 text-warning" />}
             />
           </div>
@@ -284,8 +286,9 @@ function Dashboard() {
                     <div className="mt-1 truncate text-base font-semibold text-foreground">
                       {nextProblem.title}
                     </div>
-                    <div className="mt-1 text-xs text-muted-foreground">
-                      {nextPlacement.levelTitle} • {nextProblem.difficulty}
+                    <div className="mt-1.5 flex items-center gap-2 text-xs text-muted-foreground">
+                      <span>{nextPlacement.levelTitle}</span>
+                      <DifficultyBadge difficulty={nextProblem.difficulty} />
                     </div>
                   </div>
                   <Link

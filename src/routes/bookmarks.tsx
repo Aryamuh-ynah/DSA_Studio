@@ -10,9 +10,9 @@ import { useGlobalSearch } from "@/lib/search-context";
 export const Route = createFileRoute("/bookmarks")({
   head: () => ({
     meta: [
-      { title: "Bookmarks — DSA Sheet" },
+      { title: "Bookmarks — DSA Studio" },
       { name: "description", content: "Bookmarked DSA problems." },
-      { property: "og:title", content: "Bookmarks — DSA Sheet" },
+      { property: "og:title", content: "Bookmarks — DSA Studio" },
       { property: "og:description", content: "Bookmarked DSA problems." },
     ],
   }),

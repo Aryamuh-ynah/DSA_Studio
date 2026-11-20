@@ -24,7 +24,7 @@ export const Route = createFileRoute("/topics/$slug")({
   },
   head: ({ loaderData }) => {
     const t = loaderData?.topic;
-    const title = t ? `${t.name} — DSA Sheet` : "Topic — DSA Sheet";
+    const title = t ? `${t.name} — DSA Studio` : "Topic — DSA Studio";
     const desc = t?.description ?? "DSA practice topic.";
     return {
       meta: [

@@ -12,9 +12,9 @@ import { useGlobalSearch } from "@/lib/search-context";
 export const Route = createFileRoute("/practice")({
   head: () => ({
     meta: [
-      { title: "Practice — DSA Sheet" },
+      { title: "Practice — DSA Studio" },
       { name: "description", content: "Browse DSA topics and pick a track to practice." },
-      { property: "og:title", content: "Practice — DSA Sheet" },
+      { property: "og:title", content: "Practice — DSA Studio" },
       { property: "og:description", content: "Choose a topic to start practicing." },
     ],
   }),
