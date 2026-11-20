@@ -71,7 +71,7 @@ export function AppSidebar() {
           </div>
           {!collapsed && (
             <div className="flex flex-col leading-tight">
-              <span className="text-sm font-semibold">DSA Sheet</span>
+              <span className="text-sm font-semibold">DSA Studio</span>
               <span className="text-[11px] text-muted-foreground">
                 Practice tracker
               </span>

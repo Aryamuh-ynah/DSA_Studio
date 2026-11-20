@@ -81,13 +81,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "DSA Sheet — Practice Tracker" },
+      { title: "DSA Studio — Practice Tracker" },
       {
         name: "description",
         content:
           "A clean workspace for structured DSA practice — track progress, revise, and master patterns.",
       },
-      { property: "og:title", content: "DSA Sheet — Practice Tracker" },
+      { property: "og:title", content: "DSA Studio — Practice Tracker" },
       {
         property: "og:description",
         content:
