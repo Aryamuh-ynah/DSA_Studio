@@ -69,7 +69,7 @@ When preparing for technical interviews or competitive programming, learners oft
 - **Lack of continuity:** Jumping haphazardly between unrelated topics without solidifying core mental models.
 - **Retention loss:** Forgetting solved problems due to the absence of spaced repetition and targeted revision.
 
-**DSA Studio** solves this by providing a carefully curated, zero-to-hero learning progression across **22 foundational, intermediate, and advanced topic modules**. It unifies curated challenges from **LeetCode**, **GeeksforGeeks**, **CSES**, and **AtCoder**, paired with a persistent tracking and revision workflow.
+**DSA Studio** solves this by providing a carefully curated, zero-to-hero learning progression across **23 foundational, intermediate, and advanced topic modules**. It unifies curated challenges from **LeetCode**, **GeeksforGeeks**, **CSES**, and **AtCoder**, paired with a persistent tracking and revision workflow.
 
 ---
 
@@ -100,7 +100,7 @@ When preparing for technical interviews or competitive programming, learners oft
 +-------------------------------------------------------------------------------+
 |                          PROGRESS & REVISION ENGINE                           |
 |                                                                               |
-|   [ Checklist / Solved ]   |    [ Bookmarks ]    |    [ Spaced Revision ]     |
+|   [ Checklist / Solved ]   |    [ Bookmarks ]    |    [ Revision Queue ]      |
 |   [ Topic Breakdown % ]    |    [ Difficulty ]   |    [ Local Persistence ]   |
 +-------------------------------------------------------------------------------+
 ```
@@ -109,11 +109,11 @@ When preparing for technical interviews or competitive programming, learners oft
 
 ## ✨ Core Features
 
-- **Structured 22-Topic Progression**: Progressive roadmap starting from elementary mathematics and two-pointer basics up to complex graph theory, dynamic programming, and range query trees.
+- **Structured 23-Topic Progression**: Progressive roadmap starting from elementary mathematics and two-pointer basics up to complex graph theory, dynamic programming, and range query trees.
 - **Multi-Platform Integration**: Direct links to vetted problems on LeetCode and GeeksforGeeks, plus CSES and AtCoder challenge suites.
-- **Revision Queue & Bookmarks**: Flag problems that need spaced repetition revisit. Maintain a custom list of bookmarked questions for quick reference before interview rounds.
-- **Instant Search & Topic Filters**: Find problems by name, platform, pattern, or difficulty tag in real-time.
-- **Local-First Privacy**: Progress is stored locally in your browser — no mandatory login, cookies, or cloud telemetry.
+- **Revision Queue & Bookmarks**: Flag problems you want to revisit and work through them from a dedicated revision list. Maintain a custom list of bookmarked questions for quick reference before interview rounds.
+- **Instant Search & Topic Filters**: Search problems by name, topic, or pattern from any page, then narrow each topic by difficulty, platform, and status (solved, unsolved, revision, bookmarked).
+- **Local-First Privacy**: Your progress is stored only in your browser — no account or login required. The hosted site uses Vercel Web Analytics for anonymous page-view counts, and a single cookie remembers whether the sidebar is collapsed; your progress data never leaves your device.
 - **Responsive & Modern UI**: Built with React 19, Tailwind CSS v4, Lucide icons, and Radix UI components with complete Dark/Light mode support.
 
 ---
@@ -123,7 +123,7 @@ When preparing for technical interviews or competitive programming, learners oft
 The curriculum is structured into 3 comprehensive tiers:
 
 ```
-Foundation (Phases 1–8)  ──►  Intermediate (Phases 9–15)  ──►  Advanced (Phases 16–22)
+Foundation (Phases 1–8)  ──►  Intermediate (Phases 9–15)  ──►  Advanced (Phases 16–23)
 ```
 
 ### Phase 1: Foundation Tier
@@ -181,6 +181,7 @@ Foundation (Phases 1–8)  ──►  Intermediate (Phases 9–15)  ──►  A
 20. **Matrix / 2D Grid**: In-place rotations, spiral matrix, word search in grid, flood fill, and island counting.
 21. **Advanced String Algorithms**: Knuth-Morris-Pratt (KMP), Z-Algorithm, Rabin-Karp rolling hash, and Manacher's algorithm.
 22. **Segment Tree & Fenwick Tree (BIT)**: Point updates, range sum/min/max queries, and lazy propagation.
+23. **Graphs — Node-Based**: Adjacency-list graphs built from node references — graph cloning, Disjoint Set Union, weighted shortest paths, and strongly connected components. Complements the grid-focused Graphs track.
 
 ---
 
@@ -239,7 +240,7 @@ DSA_Studio/
 │   │   ├── index.tsx       # Dashboard
 │   │   ├── practice.tsx    # Practice catalog
 │   │   ├── bookmarks.tsx   # Saved problems
-│   │   ├── revision.tsx    # Spaced repetition queue
+│   │   ├── revision.tsx    # Problems flagged for revision
 │   │   ├── progress.tsx    # Analytics & completion stats
 │   │   └── topics.$slug.tsx# Individual topic view
 │   ├── router.tsx          # Router instantiation
