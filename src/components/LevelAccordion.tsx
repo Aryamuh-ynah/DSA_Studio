@@ -30,6 +30,8 @@ export function LevelAccordion({
     <div className="overflow-hidden rounded-lg border bg-surface">
       <button
         onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
+        aria-controls={`level-panel-${level.number}`}
         className="flex w-full items-center gap-4 px-4 py-3 text-left hover:bg-hover"
       >
         <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-primary-soft text-xs font-semibold text-primary">
@@ -40,23 +42,33 @@ export function LevelAccordion({
             <span className="text-sm font-semibold text-foreground">
               Level {level.number} — {level.title}
             </span>
-            {done && <Check className="h-3.5 w-3.5 text-success" />}
+            {done && (
+              <Check aria-hidden="true" className="h-3.5 w-3.5 text-success" />
+            )}
           </div>
           <div className="mt-1.5 flex items-center gap-3">
-            <ProgressBar value={pct} className="max-w-[240px]" />
+            <ProgressBar
+              value={pct}
+              label={`Level ${level.number} progress`}
+              className="max-w-[240px]"
+            />
             <span className="shrink-0 text-xs text-muted-foreground">
               {solved} / {total} completed
             </span>
           </div>
         </div>
         <ChevronDown
+          aria-hidden="true"
           className={`h-4 w-4 shrink-0 text-muted-foreground transition-transform ${
             open ? "rotate-180" : ""
           }`}
         />
       </button>
       {open && (
-        <div className="border-t bg-background p-3 md:p-4">
+        <div
+          id={`level-panel-${level.number}`}
+          className="border-t bg-background p-3 md:p-4"
+        >
           <ProblemTable rows={rows} />
         </div>
       )}
