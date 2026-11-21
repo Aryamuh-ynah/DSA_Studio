@@ -87,8 +87,8 @@ function ProgressPage() {
 
   return (
     <AppShell title="Progress">
-      <div className="mb-6">
-        <h2 className="text-2xl font-semibold tracking-tight">Progress</h2>
+      <div className="mb-6 rounded-xl border border-border/60 bg-card p-5 shadow-sm backdrop-blur-md">
+        <h2 className="text-2xl font-bold tracking-tight text-foreground">Progress</h2>
         <p className="mt-1 text-sm text-muted-foreground">
           Your overall stats and topic-by-topic completion.
         </p>

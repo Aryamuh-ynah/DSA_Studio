@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, BookOpenCheck, CheckCircle2, ListTodo, RotateCcw } from "lucide-react";
+import { ArrowRight, BookOpenCheck, CheckCircle2, ListTodo, RotateCcw, Sparkles } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { ProgressBar } from "@/components/ProgressBar";
 import { EmptyState } from "@/components/EmptyState";
@@ -146,7 +146,7 @@ function Dashboard() {
                         key={t.slug}
                         to="/topics/$slug"
                         params={{ slug: t.slug }}
-                        className="group rounded-lg border bg-surface p-4 transition-colors hover:border-primary/50"
+                        className="group rounded-xl border border-border/70 bg-surface/90 p-4 transition-all duration-250 ease-out hover:border-primary/50 hover:shadow-md hover:-translate-y-0.5"
                       >
                         <div className="flex items-start justify-between gap-2">
                           <div>
@@ -157,7 +157,7 @@ function Dashboard() {
                               {t.short}
                             </div>
                           </div>
-                          <ArrowRight className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />
+                          <ArrowRight className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground transition-all duration-200 ease-out group-hover:text-primary group-hover:translate-x-1" />
                         </div>
                       </Link>
                     ))}
@@ -217,13 +217,22 @@ function Dashboard() {
         </div>
       ) : (
         <div className="space-y-6">
-          <div>
-            <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-              Welcome back
-            </h2>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Here's a snapshot of your DSA practice.
-            </p>
+          {/* Welcome Hero Banner */}
+          <div className="flex flex-col gap-3 rounded-xl border border-border/60 bg-card p-5 shadow-sm backdrop-blur-md sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h2 className="text-2xl font-bold tracking-tight text-foreground">
+                Welcome back
+              </h2>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Here's a snapshot of your DSA practice.
+              </p>
+            </div>
+            <div className="flex items-center gap-2 self-start sm:self-auto">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+                <Sparkles className="h-3.5 w-3.5" />
+                <span>{solved} / {total} Solved</span>
+              </span>
+            </div>
           </div>
 
           {/* Overall progress */}
@@ -278,7 +287,7 @@ function Dashboard() {
                 </span>
               </div>
               {nextProblem && nextPlacement ? (
-                <div className="mt-3 flex items-center justify-between gap-3 rounded-md border bg-background p-4">
+                <div className="mt-3 flex items-center justify-between gap-3 rounded-lg border border-border/70 bg-background/60 p-4 transition-all duration-200 hover:border-primary/40 hover:shadow-xs">
                   <div className="min-w-0">
                     <div className="text-xs text-muted-foreground">
                       {nextPlacement.topicName} • Level {nextPlacement.levelNumber}
@@ -361,7 +370,7 @@ function StatCard({
   icon: React.ReactNode;
 }) {
   return (
-    <div className="rounded-lg border bg-surface p-4">
+    <div className="rounded-lg border border-border/70 bg-surface/90 p-4 transition-all duration-200 hover:border-primary/30 hover:shadow-xs">
       <div className="flex items-center justify-between text-xs font-medium uppercase tracking-wide text-muted-foreground">
         <span>{label}</span>
         {icon}
@@ -386,7 +395,7 @@ function DiffCard({
     hard: "bg-hard-bg text-hard-foreground",
   } as const;
   return (
-    <div className="rounded-lg border bg-surface p-4">
+    <div className="rounded-lg border border-border/70 bg-surface/90 p-4 transition-all duration-200 hover:border-primary/30 hover:shadow-xs">
       <div className="flex items-center justify-between">
         <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
           {label} solved
