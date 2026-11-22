@@ -19,7 +19,7 @@ export function ProgressBar({
       className={`h-1.5 w-full overflow-hidden rounded-full bg-muted ${className}`}
     >
       <div
-        className={`h-full rounded-full transition-[width] duration-300 ease-out ${
+        className={`h-full rounded-full transition-[width] duration-500 ease-out ${
           done ? "bg-success" : "bg-primary"
         }`}
         style={{ width: `${v}%` }}

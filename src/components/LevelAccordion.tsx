@@ -8,12 +8,26 @@ import { PROBLEM_MAP } from "@/data/problems";
 
 export function LevelAccordion({
   level,
+  isOpen,
+  onToggle,
   defaultOpen = false,
 }: {
   level: Level;
+  isOpen?: boolean;
+  onToggle?: () => void;
   defaultOpen?: boolean;
 }) {
-  const [open, setOpen] = useState(defaultOpen);
+  const [internalOpen, setInternalOpen] = useState(defaultOpen);
+  const open = isOpen !== undefined ? isOpen : internalOpen;
+
+  const handleToggle = () => {
+    if (onToggle) {
+      onToggle();
+    } else {
+      setInternalOpen((o) => !o);
+    }
+  };
+
   const progress = useProgress();
 
   const rows: ProblemTableRow[] = level.problems.map((lp) => ({
@@ -27,19 +41,20 @@ export function LevelAccordion({
   const done = solved === total && total > 0;
 
   return (
-    <div className="overflow-hidden rounded-lg border bg-surface">
+    <div className="overflow-hidden rounded-lg border border-border/70 bg-surface shadow-xs backdrop-blur-md transition-colors duration-200">
       <button
-        onClick={() => setOpen((o) => !o)}
+        type="button"
+        onClick={handleToggle}
         aria-expanded={open}
         aria-controls={`level-panel-${level.number}`}
-        className="flex w-full items-center gap-4 px-4 py-3 text-left hover:bg-hover"
+        className="group flex w-full items-center gap-4 px-4 py-3 text-left hover:bg-hover/80 transition-colors duration-150 cursor-pointer"
       >
-        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-primary-soft text-xs font-semibold text-primary">
+        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-primary-soft text-xs font-semibold text-primary transition-colors duration-200 group-hover:bg-primary group-hover:text-primary-foreground">
           {level.number}
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2">
-            <span className="text-sm font-semibold text-foreground">
+            <span className="text-sm font-semibold text-foreground transition-colors group-hover:text-primary">
               Level {level.number} — {level.title}
             </span>
             {done && (
@@ -59,15 +74,15 @@ export function LevelAccordion({
         </div>
         <ChevronDown
           aria-hidden="true"
-          className={`h-4 w-4 shrink-0 text-muted-foreground transition-transform ${
-            open ? "rotate-180" : ""
+          className={`h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-300 ease-out ${
+            open ? "rotate-180 text-foreground" : "group-hover:text-foreground"
           }`}
         />
       </button>
       {open && (
         <div
           id={`level-panel-${level.number}`}
-          className="border-t bg-background p-3 md:p-4"
+          className="border-t border-border/50 bg-surface/40 backdrop-blur-md p-3 md:p-4 animate-in fade-in-50 duration-200"
         >
           <ProblemTable rows={rows} />
         </div>
