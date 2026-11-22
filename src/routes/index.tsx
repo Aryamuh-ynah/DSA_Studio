@@ -146,7 +146,7 @@ function Dashboard() {
                         key={t.slug}
                         to="/topics/$slug"
                         params={{ slug: t.slug }}
-                        className="group rounded-xl border border-border/70 bg-surface/90 p-4 transition-all duration-250 ease-out hover:border-primary/50 hover:shadow-md hover:-translate-y-0.5"
+                        className="group rounded-xl border border-border/70 bg-surface backdrop-blur-md p-4 transition-all duration-250 ease-out hover:border-primary/50 hover:shadow-md hover:-translate-y-0.5"
                       >
                         <div className="flex items-start justify-between gap-2">
                           <div>
@@ -170,7 +170,7 @@ function Dashboard() {
                   <h3 className="mb-3 text-sm font-semibold text-foreground">
                     Problems ({searchResults.problems.length})
                   </h3>
-                  <div className="divide-y rounded-lg border bg-surface">
+                  <div className="divide-y rounded-lg border border-border/70 bg-surface shadow-xs backdrop-blur-md">
                     {(showAllProblems
                       ? searchResults.problems
                       : searchResults.problems.slice(0, 10)
@@ -236,7 +236,7 @@ function Dashboard() {
           </div>
 
           {/* Overall progress */}
-          <div className="rounded-lg border bg-surface p-5">
+          <div className="rounded-xl border border-border/70 bg-surface p-5 shadow-xs backdrop-blur-md">
             <div className="flex flex-wrap items-end justify-between gap-2">
               <div>
                 <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
@@ -277,7 +277,7 @@ function Dashboard() {
 
           <div className="grid gap-4 lg:grid-cols-3">
             {/* Continue practicing */}
-            <div className="lg:col-span-2 rounded-lg border bg-surface p-5">
+            <div className="lg:col-span-2 rounded-xl border border-border/70 bg-surface p-5 shadow-xs backdrop-blur-md">
               <div className="flex items-center justify-between">
                 <h3 className="text-sm font-semibold text-foreground">
                   Continue Practicing
@@ -287,7 +287,7 @@ function Dashboard() {
                 </span>
               </div>
               {nextProblem && nextPlacement ? (
-                <div className="mt-3 flex items-center justify-between gap-3 rounded-lg border border-border/70 bg-background/60 p-4 transition-all duration-200 hover:border-primary/40 hover:shadow-xs">
+                <div className="mt-3 flex items-center justify-between gap-3 rounded-lg border border-border/70 bg-surface-muted/60 p-4 backdrop-blur-sm transition-all duration-200 hover:border-primary/40 hover:shadow-xs">
                   <div className="min-w-0">
                     <div className="text-xs text-muted-foreground">
                       {nextPlacement.topicName} • Level {nextPlacement.levelNumber}
@@ -321,7 +321,7 @@ function Dashboard() {
             </div>
 
             {/* Recently practiced */}
-            <div className="rounded-lg border bg-surface p-5">
+            <div className="rounded-xl border border-border/70 bg-surface p-5 shadow-xs backdrop-blur-md">
               <h3 className="text-sm font-semibold text-foreground">
                 Recently Practiced
               </h3>
@@ -370,7 +370,7 @@ function StatCard({
   icon: React.ReactNode;
 }) {
   return (
-    <div className="rounded-lg border border-border/70 bg-surface/90 p-4 transition-all duration-200 hover:border-primary/30 hover:shadow-xs">
+    <div className="rounded-xl border border-border/70 bg-surface backdrop-blur-md p-4 shadow-xs transition-all duration-200 hover:border-primary/30 hover:shadow-sm">
       <div className="flex items-center justify-between text-xs font-medium uppercase tracking-wide text-muted-foreground">
         <span>{label}</span>
         {icon}
@@ -395,7 +395,7 @@ function DiffCard({
     hard: "bg-hard-bg text-hard-foreground",
   } as const;
   return (
-    <div className="rounded-lg border border-border/70 bg-surface/90 p-4 transition-all duration-200 hover:border-primary/30 hover:shadow-xs">
+    <div className="rounded-xl border border-border/70 bg-surface backdrop-blur-md p-4 shadow-xs transition-all duration-200 hover:border-primary/30 hover:shadow-sm">
       <div className="flex items-center justify-between">
         <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
           {label} solved

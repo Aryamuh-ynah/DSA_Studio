@@ -236,7 +236,7 @@ function FilterSelect({
 }) {
   return (
     <Select value={value} onValueChange={onChange}>
-      <SelectTrigger className="h-9 w-[160px] bg-surface text-sm">
+      <SelectTrigger className="h-9 w-[160px] border-border/70 bg-surface shadow-xs backdrop-blur-md text-sm">
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>

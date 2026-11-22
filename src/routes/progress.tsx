@@ -94,7 +94,7 @@ function ProgressPage() {
         </p>
       </div>
 
-      <div className="rounded-lg border bg-surface p-5">
+      <div className="rounded-xl border border-border/70 bg-surface p-5 shadow-xs backdrop-blur-md">
         <div className="flex flex-wrap items-end justify-between gap-2">
           <div>
             <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
@@ -116,7 +116,7 @@ function ProgressPage() {
       </div>
 
       <div className="mt-6 grid gap-4 lg:grid-cols-3">
-        <div className="lg:col-span-2 rounded-lg border bg-surface p-5">
+        <div className="lg:col-span-2 rounded-xl border border-border/70 bg-surface p-5 shadow-xs backdrop-blur-md">
           <div className="flex items-center justify-between">
             <h3 className="text-sm font-semibold">Topic progress</h3>
             {q && (
@@ -168,7 +168,7 @@ function ProgressPage() {
         </div>
 
         <div className="space-y-4">
-          <div className="rounded-lg border bg-surface p-5">
+          <div className="rounded-xl border border-border/70 bg-surface p-5 shadow-xs backdrop-blur-md">
             <h3 className="text-sm font-semibold">Strongest topics</h3>
             <ul className="mt-3 space-y-2 text-sm">
               {strongest.map((r) => (
@@ -179,7 +179,7 @@ function ProgressPage() {
               ))}
             </ul>
           </div>
-          <div className="rounded-lg border bg-surface p-5">
+          <div className="rounded-xl border border-border/70 bg-surface p-5 shadow-xs backdrop-blur-md">
             <h3 className="text-sm font-semibold">Needs practice</h3>
             <ul className="mt-3 space-y-2 text-sm">
               {weakest.map((r) => (
@@ -193,7 +193,7 @@ function ProgressPage() {
         </div>
       </div>
 
-      <div className="mt-6 rounded-lg border bg-surface p-5">
+      <div className="mt-6 rounded-xl border border-border/70 bg-surface p-5 shadow-xs backdrop-blur-md">
         <h3 className="text-sm font-semibold">Recently completed</h3>
         {recent.length === 0 ? (
           <p className="mt-3 text-sm text-muted-foreground">
@@ -246,7 +246,7 @@ function DiffProgress({
     hard: "text-hard-foreground bg-hard-bg",
   } as const;
   return (
-    <div className="rounded-lg border bg-surface p-4">
+    <div className="rounded-xl border border-border/70 bg-surface backdrop-blur-md p-4 shadow-xs">
       <div className="flex items-center justify-between">
         <span className={`rounded px-1.5 py-0.5 text-[10px] font-semibold ${toneMap[tone]}`}>
           {label}

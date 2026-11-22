@@ -89,7 +89,7 @@ function PracticePage() {
                 key={t.slug}
                 to="/topics/$slug"
                 params={{ slug: t.slug }}
-                className="group relative rounded-xl border border-border/70 bg-surface/90 p-5 shadow-xs transition-all duration-250 ease-out hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-0.5"
+                className="group relative rounded-xl border border-border/70 bg-surface backdrop-blur-md p-5 shadow-xs transition-all duration-250 ease-out hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-0.5"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div>

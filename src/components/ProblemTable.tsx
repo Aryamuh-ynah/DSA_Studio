@@ -26,10 +26,10 @@ export function ProblemTable({
   return (
     <>
       {/* Desktop table */}
-      <div className="hidden overflow-hidden rounded-lg border bg-surface md:block">
+      <div className="hidden overflow-hidden rounded-lg border border-border/70 bg-surface shadow-xs backdrop-blur-md md:block">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b bg-surface-muted/60 text-left text-xs font-medium uppercase tracking-wide text-muted-foreground">
+            <tr className="border-b border-border/60 bg-surface-muted/80 text-left text-xs font-medium uppercase tracking-wide text-muted-foreground">
               <th className="w-10 px-3 py-2.5"></th>
               <th className="px-3 py-2.5">Problem</th>
               <th className="w-24 px-3 py-2.5">Difficulty</th>

@@ -82,7 +82,7 @@ export function LevelAccordion({
       {open && (
         <div
           id={`level-panel-${level.number}`}
-          className="border-t border-border/50 bg-background/50 p-3 md:p-4 animate-in fade-in-50 duration-200"
+          className="border-t border-border/50 bg-surface/40 backdrop-blur-md p-3 md:p-4 animate-in fade-in-50 duration-200"
         >
           <ProblemTable rows={rows} />
         </div>
