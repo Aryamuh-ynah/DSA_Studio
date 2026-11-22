@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg?style=for-the-badge)](https://www.gnu.org/licenses/agpl-3.0.html)
 [![Discord](https://img.shields.io/badge/Discord-Join%20Community-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/7MhyE48Au)
 [![GitHub Stars](https://img.shields.io/github/stars/KanishJebaMathewM/DSA_Studio?style=for-the-badge&logo=github&color=blue)](https://github.com/KanishJebaMathewM/DSA_Studio/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/KanishJebaMathewM/DSA_Studio?style=for-the-badge&logo=github&color=blue)](https://github.com/KanishJebaMathewM/DSA_Studio/network/members)
@@ -394,4 +394,12 @@ A huge thank you to everyone contributing to DSA Studio! ❤️
 
 ## 📄 License
 
-This project is licensed under the [MIT License](LICENSE) — see the LICENSE file for details.
+DSA Studio is licensed under the [GNU Affero General Public License v3.0 only](LICENSE) (`AGPL-3.0-only`).
+
+Previous releases and copies distributed under the original MIT licence retain the permissions granted by the [original MIT License](LICENSE-MIT). Moving forward, newly published project releases and contributions are covered by AGPL-3.0-only.
+
+Forking, modifying, redistributing, commercial use and network deployment are permitted subject to the licence terms. If you modify DSA Studio and make the modified version available to users through a network service, Section 13 requires you to provide the Corresponding Source of your modified version to those users through a standard, accessible mechanism.
+
+For deployed modified versions, configure `VITE_SOURCE_URL` to a public location containing the exact Corresponding Source offered by that deployment. The application otherwise links to this repository as the source for the unmodified project.
+
+The licence does not require contributors to submit improvements back to this repository. Contributors retain copyright in their contributions unless they enter a separate agreement otherwise. Third-party dependencies and copied components remain subject to their own licences and notices.

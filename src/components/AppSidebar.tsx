@@ -55,6 +55,10 @@ const iconMap: Record<string, LucideIcon> = {
   CaseSensitive, Grid3x3, Calculator, LayoutList, Type, Hash, AppWindow,
 };
 
+const sourceUrl =
+  import.meta.env.VITE_SOURCE_URL ||
+  "https://github.com/KanishJebaMathewM/DSA_Studio";
+
 export function AppSidebar() {
   const pathname = useRouterState({ select: (r) => r.location.pathname });
   const { state, toggleSidebar } = useSidebar();
@@ -165,6 +169,26 @@ export function AppSidebar() {
       </SidebarContent>
 
       <SidebarFooter className="border-t p-2">
+        {!collapsed && (
+          <div className="mb-1 flex items-center justify-center gap-3 px-2 text-[11px] text-muted-foreground">
+            <a
+              href={sourceUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-foreground"
+            >
+              Source
+            </a>
+            <a
+              href="https://www.gnu.org/licenses/agpl-3.0.html"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-foreground"
+            >
+              AGPL-3.0-only
+            </a>
+          </div>
+        )}
         <Button
           variant="ghost"
           size="sm"
