@@ -28,12 +28,18 @@ const listeners = new Set<() => void>();
 let cache: ProgressMap | null = null;
 
 function isBrowser(): boolean {
-  return typeof window !== "undefined" && typeof localStorage !== "undefined";
+  try {
+    return typeof window !== "undefined" && typeof localStorage !== "undefined";
+  } catch {
+    // Accessing localStorage can throw in privacy-restricted browser contexts.
+    return false;
+  }
 }
 
 function read(): ProgressMap {
-  if (!isBrowser()) return EMPTY_MAP;
+  if (typeof window === "undefined") return EMPTY_MAP;
   if (cache) return cache;
+  if (!isBrowser()) return EMPTY_MAP;
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return (cache = EMPTY_MAP);
