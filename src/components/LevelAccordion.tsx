@@ -77,14 +77,20 @@ export function LevelAccordion({
           }`}
         />
       </button>
-      {open && (
-        <div
-          id={`level-panel-${level.number}`}
-          className="border-t border-border/50 bg-surface/40 backdrop-blur-md p-2.5 sm:p-3 md:p-4 animate-in fade-in-50 duration-200"
-        >
-          <ProblemTable rows={rows} />
+      <div
+        className={`grid transition-[grid-template-rows,opacity] duration-300 ease-in-out ${
+          open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+        }`}
+      >
+        <div className="overflow-hidden">
+          <div
+            id={`level-panel-${level.number}`}
+            className="border-t border-border/50 bg-surface/40 backdrop-blur-md p-2.5 sm:p-3 md:p-4"
+          >
+            <ProblemTable rows={rows} />
+          </div>
         </div>
-      )}
+      </div>
     </div>
   );
 }

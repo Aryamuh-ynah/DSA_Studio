@@ -241,7 +241,7 @@ function FilterSelect({
       <SelectTrigger className="h-9 w-[calc(50%-0.25rem)] sm:w-[150px] md:w-[160px] border-border/70 bg-surface shadow-xs backdrop-blur-md text-xs sm:text-sm">
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
-      <SelectContent className="max-h-60 max-w-[calc(100vw-2rem)]">
+      <SelectContent className="max-h-[min(15rem,var(--radix-select-content-available-height))] max-w-[calc(100vw-2rem)]">
         {options.map((o) => (
           <SelectItem key={o.v} value={o.v}>
             {o.l}

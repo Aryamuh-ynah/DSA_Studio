@@ -165,26 +165,74 @@ export function ProblemTable({
                   className="mt-0.5 shrink-0 transition-transform duration-150 active:scale-90 cursor-pointer"
                 />
                 <div className="min-w-0 flex-1">
-                  <a
-                    href={problem.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`block break-words text-sm font-medium transition-colors hover:text-primary ${
-                      done
-                        ? "text-muted-foreground line-through decoration-muted-foreground/50"
-                        : "text-foreground"
-                    }`}
-                  >
-                    {problem.title}
-                  </a>
-                  <div className="mt-1.5 flex flex-wrap items-center gap-1.5 text-[11px] text-muted-foreground">
-                    <DifficultyBadge difficulty={problem.difficulty} />
-                    <PlatformBadge platform={problem.platform} />
-                    {done && (
-                      <span className="inline-flex items-center gap-1 text-[11px] font-medium text-success">
-                        <Check className="h-3 w-3" /> Solved
-                      </span>
-                    )}
+                  <div className="flex items-start justify-between gap-2">
+                    <a
+                      href={problem.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`block break-words text-sm font-medium transition-colors hover:text-primary ${
+                        done
+                          ? "text-muted-foreground line-through decoration-muted-foreground/50"
+                          : "text-foreground"
+                      }`}
+                    >
+                      {problem.title}
+                    </a>
+                    <a
+                      href={problem.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex shrink-0 items-center gap-1 rounded-md px-2 py-0.5 text-xs font-medium text-primary hover:bg-primary-soft transition-colors"
+                      title="Solve problem"
+                    >
+                      <span>Solve</span>
+                      <ExternalLink aria-hidden="true" className="h-3 w-3" />
+                    </a>
+                  </div>
+
+                  <div className="mt-2 flex flex-wrap items-center justify-between gap-1.5 sm:gap-2">
+                    <div className="flex flex-wrap items-center gap-1.5">
+                      <DifficultyBadge difficulty={problem.difficulty} />
+                      <PlatformBadge platform={problem.platform} />
+                      {done && (
+                        <span className="inline-flex items-center gap-0.5 text-[11px] font-medium text-success">
+                          <Check className="h-3 w-3" /> Solved
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-0.5 sm:gap-1">
+                      <ProblemNotes
+                        problemId={problem.id}
+                        problemTitle={problem.title}
+                        variant="mobile"
+                      />
+                      <button
+                        aria-label={`Bookmark ${problem.title}`}
+                        aria-pressed={bookmarked}
+                        onClick={() => progressRepo.toggleBookmarked(problem.id)}
+                        className="flex h-9 w-9 items-center justify-center rounded-md text-muted-foreground hover:bg-hover hover:text-foreground active:scale-95 transition-all cursor-pointer"
+                        title={bookmarked ? "Remove bookmark" : "Bookmark problem"}
+                      >
+                        <Bookmark
+                          aria-hidden="true"
+                          className={`h-4 w-4 transition-colors ${
+                            bookmarked ? "fill-gold text-gold" : "text-muted-foreground"
+                          }`}
+                        />
+                      </button>
+                      <button
+                        aria-label={`Mark ${problem.title} as needs revision`}
+                        aria-pressed={rev}
+                        onClick={() => progressRepo.toggleNeedsRevision(problem.id)}
+                        className="flex h-9 w-9 items-center justify-center rounded-md text-muted-foreground hover:bg-hover hover:text-foreground active:scale-95 transition-all cursor-pointer"
+                        title={rev ? "Remove from revision" : "Flag for revision"}
+                      >
+                        <RotateCcw
+                          aria-hidden="true"
+                          className={`h-4 w-4 transition-colors ${rev ? "text-warning" : "text-muted-foreground"}`}
+                        />
+                      </button>
+                    </div>
                   </div>
                   {showNotes && hasNotes(entry?.notes) && (
                     <p className="mt-2 line-clamp-2 whitespace-pre-line text-xs text-muted-foreground bg-surface-muted/50 rounded p-1.5 border border-border/40">
@@ -192,52 +240,6 @@ export function ProblemTable({
                     </p>
                   )}
                 </div>
-              </div>
-
-              {/* Mobile action bar with touch-friendly targets */}
-              <div className="mt-2.5 flex items-center justify-between border-t border-border/40 pt-2 text-xs">
-                <div className="flex items-center gap-1">
-                  <ProblemNotes
-                    problemId={problem.id}
-                    problemTitle={problem.title}
-                    variant="mobile"
-                  />
-                  <button
-                    aria-label={`Bookmark ${problem.title}`}
-                    aria-pressed={bookmarked}
-                    onClick={() => progressRepo.toggleBookmarked(problem.id)}
-                    className="flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground hover:bg-hover hover:text-foreground active:scale-90 transition-all cursor-pointer"
-                    title={bookmarked ? "Remove bookmark" : "Bookmark problem"}
-                  >
-                    <Bookmark
-                      aria-hidden="true"
-                      className={`h-4 w-4 transition-colors ${
-                        bookmarked ? "fill-gold text-gold" : "text-muted-foreground"
-                      }`}
-                    />
-                  </button>
-                  <button
-                    aria-label={`Mark ${problem.title} as needs revision`}
-                    aria-pressed={rev}
-                    onClick={() => progressRepo.toggleNeedsRevision(problem.id)}
-                    className="flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground hover:bg-hover hover:text-foreground active:scale-90 transition-all cursor-pointer"
-                    title={rev ? "Remove from revision" : "Flag for revision"}
-                  >
-                    <RotateCcw
-                      aria-hidden="true"
-                      className={`h-4 w-4 transition-colors ${rev ? "text-warning" : "text-muted-foreground"}`}
-                    />
-                  </button>
-                </div>
-                <a
-                  href={problem.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex h-8 items-center gap-1 rounded-md px-2.5 font-medium text-primary hover:bg-primary-soft transition-colors"
-                >
-                  <span>Solve</span>
-                  <ExternalLink aria-hidden="true" className="h-3 w-3" />
-                </a>
               </div>
             </div>
           );

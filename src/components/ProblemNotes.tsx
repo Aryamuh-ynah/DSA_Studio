@@ -82,7 +82,7 @@ export function ProblemNotes({
         <SheetTrigger asChild>
           <button
             aria-label={label}
-            className="flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground hover:bg-hover hover:text-foreground active:scale-90 transition-all cursor-pointer"
+            className="flex h-9 w-9 items-center justify-center rounded-md text-muted-foreground hover:bg-hover hover:text-foreground active:scale-95 transition-all cursor-pointer"
             title={active ? "View / edit notes" : "Add notes"}
           >
             <StickyNote
