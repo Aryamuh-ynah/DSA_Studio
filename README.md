@@ -13,7 +13,7 @@
 
 **A modern, structured zero-to-hero Data Structures & Algorithms practice platform, tracker, and revision system.**
 
-[Explore Problems](#-detailed-learning-roadmap) • [Features](#-core-features) • [Quickstart](#-getting-started) • [Contributing](#-contributing) • [Join Discord](#-community--discussion)
+[Explore Problems](#-detailed-learning-roadmap) • [Features](#-core-features) • [Quickstart](#-getting-started) • [Contributing](#-contributing) • [Community](#-community--discussion) • [Contributors](#-contributors)
 
 </div>
 
@@ -58,6 +58,7 @@ We have an active Discord server for discussing **DSA Studio**, sharing intervie
 - [Deployment](#-deployment)
 - [Contributing](#-contributing)
 - [Community & Discussion](#-community--discussion)
+- [Contributors](#-contributors)
 - [License](#-license)
 
 ---
@@ -380,6 +381,14 @@ Join our growing community of developers, competitive programmers, and open-sour
   - 💼 **Interview & Coding Contest Prep:** Discuss active LeetCode, Codeforces, and AtCoder contests and share technical interview experiences.
 - **GitHub Discussions & Issues:** [GitHub Issues](https://github.com/KanishJebaMathewM/DSA_Studio/issues)
 - **Repository:** [https://github.com/KanishJebaMathewM/DSA_Studio](https://github.com/KanishJebaMathewM/DSA_Studio)
+
+---
+
+## 👥 Contributors
+
+A huge thank you to everyone contributing to DSA Studio! ❤️
+
+[![Contributors](https://contrib.rocks/image?repo=KanishJebaMathewM/DSA_Studio&max=500)](https://github.com/KanishJebaMathewM/DSA_Studio/graphs/contributors)
 
 ---
 

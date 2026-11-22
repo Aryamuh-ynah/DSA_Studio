@@ -129,6 +129,7 @@ export function ThemeSelector() {
                   <button
                     key={p.id}
                     type="button"
+                    aria-pressed={isSelected}
                     onClick={() => setPreset(p.id)}
                     className={`group relative flex flex-col overflow-hidden rounded-lg border text-left transition-all cursor-pointer ${
                       isSelected
