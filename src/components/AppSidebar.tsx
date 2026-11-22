@@ -30,6 +30,7 @@ import {
   Type,
   Hash,
   AppWindow,
+  X,
   type LucideIcon,
 } from "lucide-react";
 import { TOPICS } from "@/data/problems";
@@ -50,15 +51,33 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const iconMap: Record<string, LucideIcon> = {
-  Share2, Network, Sigma, MoveHorizontal, ArrowLeftRight,
-  ArrowDownAZ, GitFork, Link2, Layers, SearchCode, Layers3,
-  ListOrdered, GitBranch, TrendingUp, TreePine, Binary,
-  CaseSensitive, Grid3x3, Calculator, LayoutList, Type, Hash, AppWindow,
+  Share2,
+  Network,
+  Sigma,
+  MoveHorizontal,
+  ArrowLeftRight,
+  ArrowDownAZ,
+  GitFork,
+  Link2,
+  Layers,
+  SearchCode,
+  Layers3,
+  ListOrdered,
+  GitBranch,
+  TrendingUp,
+  TreePine,
+  Binary,
+  CaseSensitive,
+  Grid3x3,
+  Calculator,
+  LayoutList,
+  Type,
+  Hash,
+  AppWindow,
 };
 
 const sourceUrl =
-  import.meta.env.VITE_SOURCE_URL ||
-  "https://github.com/KanishJebaMathewM/DSA_Studio";
+  import.meta.env.VITE_SOURCE_URL || "https://github.com/KanishJebaMathewM/DSA_Studio";
 
 export function AppSidebar() {
   const pathname = useRouterState({ select: (r) => r.location.pathname });
@@ -84,10 +103,19 @@ export function AppSidebar() {
           {!collapsed && (
             <div className="flex flex-col leading-tight group-data-[collapsible=icon]:hidden">
               <span className="text-sm font-semibold">DSA Studio</span>
-              <span className="text-[11px] text-muted-foreground">
-                Practice tracker
-              </span>
+              <span className="text-[11px] text-muted-foreground">Practice tracker</span>
             </div>
+          )}
+          {isMobile && (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleSidebar}
+              className="ml-auto h-8 w-8 text-muted-foreground hover:text-foreground cursor-pointer"
+              aria-label="Close sidebar"
+            >
+              <X className="h-4 w-4" />
+            </Button>
           )}
         </div>
       </SidebarHeader>
@@ -124,15 +152,8 @@ export function AppSidebar() {
                 const Icon = iconMap[t.icon] ?? Layers;
                 return (
                   <SidebarMenuItem key={t.slug}>
-                    <SidebarMenuButton
-                      asChild
-                      isActive={isTopicActive(t.slug)}
-                      tooltip={t.name}
-                    >
-                      <Link
-                        to="/topics/$slug"
-                        params={{ slug: t.slug }}
-                      >
+                    <SidebarMenuButton asChild isActive={isTopicActive(t.slug)} tooltip={t.name}>
+                      <Link to="/topics/$slug" params={{ slug: t.slug }}>
                         <Icon />
                         <span className="truncate">{t.name}</span>
                       </Link>
@@ -179,12 +200,7 @@ export function AppSidebar() {
       <SidebarFooter className="border-t border-sidebar-border/40 p-2 group-data-[collapsible=icon]:items-center group-data-[collapsible=icon]:p-2">
         {!collapsed && (
           <div className="mb-1 flex items-center justify-center gap-3 px-2 text-[11px] text-muted-foreground">
-            <a
-              href={sourceUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="hover:text-foreground"
-            >
+            <a href={sourceUrl} target="_blank" rel="noreferrer" className="hover:text-foreground">
               Source
             </a>
             <a

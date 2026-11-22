@@ -1,25 +1,14 @@
 import { useEffect, useState } from "react";
 import { Check, Moon, Palette, Sparkles, Sun, ChevronRight } from "lucide-react";
 import { useTheme, THEME_PRESETS, type ThemePresetId } from "@/lib/theme";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 
 export function ThemeSelector() {
-  const {
-    mode,
-    preset,
-    isArtworkEnabled,
-    toggle,
-    setPreset,
-    cyclePreset,
-    setIsArtworkEnabled,
-  } = useTheme();
+  const { mode, preset, isArtworkEnabled, toggle, setPreset, cyclePreset, setIsArtworkEnabled } =
+    useTheme();
   const [isOpen, setIsOpen] = useState(false);
 
   const isDark = mode === "dark";
@@ -46,13 +35,13 @@ export function ThemeSelector() {
   }, [cyclePreset]);
 
   return (
-    <div className="flex items-center gap-1.5">
+    <div className="flex items-center gap-1 sm:gap-1.5">
       {/* Quick Day / Night Toggle Button */}
       <Button
         variant="ghost"
         size="icon"
         onClick={toggle}
-        className="h-9 w-9 text-muted-foreground hover:text-foreground"
+        className="h-8 w-8 sm:h-9 sm:w-9 text-muted-foreground hover:text-foreground cursor-pointer"
         aria-label={isDark ? "Switch to day mode" : "Switch to night mode"}
         title={isDark ? "Switch to day mode" : "Switch to night mode"}
       >
@@ -65,7 +54,7 @@ export function ThemeSelector() {
           <Button
             variant="ghost"
             size="sm"
-            className="h-9 gap-1.5 px-2.5 text-xs text-muted-foreground hover:text-foreground"
+            className="h-8 px-2 sm:h-9 sm:gap-1.5 sm:px-2.5 text-xs text-muted-foreground hover:text-foreground cursor-pointer"
             aria-label="Open theme library"
             title={`Atmosphere: ${currentPreset.name} (Press T to cycle)`}
           >
@@ -86,7 +75,7 @@ export function ThemeSelector() {
 
         <PopoverContent
           align="end"
-          className="w-84 sm:w-96 p-4 shadow-xl backdrop-blur-md"
+          className="w-[calc(100vw-24px)] max-w-sm p-3.5 sm:p-4 shadow-xl backdrop-blur-md"
         >
           {/* Header */}
           <div className="mb-3 flex items-center justify-between border-b pb-2">
@@ -94,17 +83,13 @@ export function ThemeSelector() {
               <Sparkles className="h-4 w-4 text-primary" />
               <h3 className="font-semibold text-sm">Theme Library</h3>
             </div>
-            <span className="text-[11px] text-muted-foreground">
-              Study Atmosphere
-            </span>
+            <span className="text-[11px] text-muted-foreground">Study Atmosphere</span>
           </div>
 
           {/* Theme Presets List */}
           <div className="space-y-2.5">
             <div className="flex items-center justify-between">
-              <p className="text-xs font-medium text-muted-foreground">
-                Select Environment
-              </p>
+              <p className="text-xs font-medium text-muted-foreground">Select Environment</p>
               <button
                 type="button"
                 onClick={cyclePreset}
@@ -116,14 +101,10 @@ export function ThemeSelector() {
               </button>
             </div>
 
-            <div className="grid grid-cols-2 gap-2.5">
+            <div className="grid grid-cols-2 gap-2 sm:gap-2.5">
               {THEME_PRESETS.map((p) => {
                 const isSelected = preset === p.id;
-                const thumbUrl = p.thumb
-                  ? isDark
-                    ? p.thumb.dark
-                    : p.thumb.light
-                  : null;
+                const thumbUrl = p.thumb ? (isDark ? p.thumb.dark : p.thumb.light) : null;
 
                 return (
                   <button
@@ -169,9 +150,7 @@ export function ThemeSelector() {
 
                     {/* Metadata */}
                     <div className="p-2">
-                      <div className="font-medium text-xs text-foreground truncate">
-                        {p.name}
-                      </div>
+                      <div className="font-medium text-xs text-foreground truncate">{p.name}</div>
                       <div className="text-[10px] text-muted-foreground line-clamp-1">
                         {p.tagline}
                       </div>
@@ -193,8 +172,8 @@ export function ThemeSelector() {
                   {preset === "greenhouse-studio"
                     ? "Botanical greenhouse environment"
                     : preset === "mountain-observatory"
-                    ? "Mountain observatory environment"
-                    : "Lofi window study environment"}
+                      ? "Mountain observatory environment"
+                      : "Lofi window study environment"}
                 </p>
               </div>
               <Switch
@@ -208,7 +187,9 @@ export function ThemeSelector() {
           {/* Quick Tip / Keyboard Shortcut Footer */}
           <div className="mt-3 flex items-center justify-between border-t pt-2.5 text-[11px] text-muted-foreground">
             <span>
-              Tip: Press <kbd className="rounded border bg-muted/60 px-1 py-0.5 text-[10px] font-mono">T</kbd> to cycle
+              Tip: Press{" "}
+              <kbd className="rounded border bg-muted/60 px-1 py-0.5 text-[10px] font-mono">T</kbd>{" "}
+              to cycle
             </span>
             <span className="text-[10px] text-muted-foreground/80">
               {isDark ? "Night Mode" : "Day Mode"}

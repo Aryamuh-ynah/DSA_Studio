@@ -67,10 +67,7 @@ function TopicPage() {
   const pct = total ? Math.round((solved / total) * 100) : 0;
 
   const filtersActive =
-    query.trim() !== "" ||
-    difficulty !== "all" ||
-    status !== "all" ||
-    platform !== "all";
+    query.trim() !== "" || difficulty !== "all" || status !== "all" || platform !== "all";
 
   const filteredLevels = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -135,16 +132,18 @@ function TopicPage() {
 
   return (
     <AppShell title={topic.name}>
-      <div className="mb-6 rounded-xl border border-border/60 bg-card p-5 shadow-sm backdrop-blur-md">
-        <h2 className="text-2xl font-bold tracking-tight text-foreground">{topic.name}</h2>
-        <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
+      <div className="mb-6 rounded-xl border border-border/60 bg-card p-4 sm:p-5 shadow-sm backdrop-blur-md">
+        <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground break-words">
+          {topic.name}
+        </h2>
+        <p className="mt-1 max-w-2xl text-xs sm:text-sm text-muted-foreground">
           {topic.description}
         </p>
-        <div className="mt-4 flex items-center gap-3">
-          <ProgressBar value={pct} className="max-w-md" />
-          <div className="text-xs font-medium text-muted-foreground">
+        <div className="mt-4 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
+          <ProgressBar value={pct} className="w-full sm:max-w-md" />
+          <div className="text-xs font-medium text-muted-foreground shrink-0">
             {solved} / {total} completed •{" "}
-            <span className="text-primary">{pct}%</span>
+            <span className="text-primary font-semibold">{pct}%</span>
           </div>
         </div>
       </div>
@@ -179,7 +178,7 @@ function TopicPage() {
           onChange={setStatus}
           placeholder="Status"
           options={[
-            { v: "all", l: "All" },
+            { v: "all", l: "All status" },
             { v: "solved", l: "Solved" },
             { v: "unsolved", l: "Unsolved" },
             { v: "revision", l: "Needs Revision" },
@@ -187,7 +186,12 @@ function TopicPage() {
           ]}
         />
         {filtersActive && (
-          <Button variant="ghost" size="sm" onClick={clear} className="text-muted-foreground">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={clear}
+            className="h-9 text-xs text-muted-foreground hover:text-foreground cursor-pointer"
+          >
             Clear filters
           </Button>
         )}
@@ -211,9 +215,7 @@ function TopicPage() {
                 key={`${topic.slug}-${levelId}`}
                 level={lvl}
                 isOpen={openLevelId === levelId}
-                onToggle={() =>
-                  setOpenLevelId((prev) => (prev === levelId ? null : levelId))
-                }
+                onToggle={() => setOpenLevelId((prev) => (prev === levelId ? null : levelId))}
               />
             );
           })}
@@ -236,10 +238,10 @@ function FilterSelect({
 }) {
   return (
     <Select value={value} onValueChange={onChange}>
-      <SelectTrigger className="h-9 w-[160px] border-border/70 bg-surface shadow-xs backdrop-blur-md text-sm">
+      <SelectTrigger className="h-9 w-[calc(50%-0.25rem)] sm:w-[150px] md:w-[160px] border-border/70 bg-surface shadow-xs backdrop-blur-md text-xs sm:text-sm">
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent className="max-h-60 max-w-[calc(100vw-2rem)]">
         {options.map((o) => (
           <SelectItem key={o.v} value={o.v}>
             {o.l}

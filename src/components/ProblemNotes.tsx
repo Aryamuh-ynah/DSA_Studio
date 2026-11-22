@@ -80,18 +80,27 @@ export function ProblemNotes({
     return (
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
-          <button aria-label={label}>
+          <button
+            aria-label={label}
+            className="flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground hover:bg-hover hover:text-foreground active:scale-90 transition-all cursor-pointer"
+            title={active ? "View / edit notes" : "Add notes"}
+          >
             <StickyNote
               className={`h-4 w-4 ${active ? "fill-primary/20 text-primary" : "text-muted-foreground"}`}
             />
           </button>
         </SheetTrigger>
-        <SheetContent side="bottom" className="rounded-t-lg">
-          <SheetHeader>
-            <SheetTitle className="truncate">{problemTitle}</SheetTitle>
-            <SheetDescription>Your notes are saved automatically.</SheetDescription>
+        <SheetContent
+          side="bottom"
+          className="rounded-t-xl max-h-[85vh] p-4 sm:p-6 overflow-y-auto"
+        >
+          <SheetHeader className="text-left">
+            <SheetTitle className="break-words text-base sm:text-lg">{problemTitle}</SheetTitle>
+            <SheetDescription className="text-xs text-muted-foreground">
+              Your notes are saved automatically.
+            </SheetDescription>
           </SheetHeader>
-          <div className="mt-4">{open && <NotesEditor problemId={problemId} />}</div>
+          <div className="mt-3">{open && <NotesEditor problemId={problemId} />}</div>
         </SheetContent>
       </Sheet>
     );
@@ -115,7 +124,7 @@ export function ProblemNotes({
           />
         </button>
       </PopoverTrigger>
-      <PopoverContent align="end" className="w-80">
+      <PopoverContent align="end" className="w-80 max-w-[calc(100vw-2rem)] p-3 sm:p-4">
         <p className="mb-2 truncate text-sm font-medium">{problemTitle}</p>
         {open && <NotesEditor problemId={problemId} autoFocus />}
       </PopoverContent>
