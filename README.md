@@ -271,8 +271,8 @@ DSA_Studio/
 
 ### Prerequisites
 
-- **Node.js**: `v20.x` or higher
-- Package manager: `npm`, `bun`, or `pnpm`
+- **Node.js**: `^20.19.0 || >=22.12.0`
+- **Package manager**: npm (official)
 
 ### Installation & Local Run
 
@@ -284,20 +284,16 @@ DSA_Studio/
 
 2. **Install dependencies:**
    ```bash
-   npm install
-   # or
-   bun install
+   npm ci
    ```
 
 3. **Start the development server:**
    ```bash
    npm run dev
-   # or
-   bun dev
    ```
 
 4. **Open in your browser:**
-   Navigate to `http://localhost:3000` (or the port indicated in terminal).
+   Open the local URL printed in your terminal.
 
 ### Available Scripts
 
@@ -306,8 +302,11 @@ DSA_Studio/
 | `npm run dev` | Starts the Vite development server with hot-reload |
 | `npm run build` | Builds the client and server output for production |
 | `npm run preview` | Previews the production build locally |
+| `npm test` | Runs data-safety regression tests |
 | `npm run lint` | Runs ESLint across the codebase |
 | `npm run format` | Formats all files using Prettier |
+
+**Note:** The data-safety tests require Node.js `v22.6.0` or later, or Bun, because they import TypeScript files directly.
 
 ---
 

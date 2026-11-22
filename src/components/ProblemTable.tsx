@@ -53,7 +53,7 @@ export function ProblemTable({
                     <Checkbox
                       checked={done}
                       onCheckedChange={() => progressRepo.toggleCompleted(problem.id)}
-                      aria-label="Mark completed"
+                      aria-label={`Mark ${problem.title} as completed`}
                     />
                   </td>
                   <td className="px-3 py-2 align-middle">
@@ -69,7 +69,7 @@ export function ProblemTable({
                         {problem.title}
                       </a>
                       {done && (
-                        <Check className="h-3.5 w-3.5 text-success" />
+                        <Check aria-hidden="true" className="h-3.5 w-3.5 text-success" />
                       )}
                       <div className="ml-auto flex items-center gap-2">
                         <ProblemNotes
@@ -78,13 +78,15 @@ export function ProblemTable({
                           variant="desktop"
                         />
                         <button
-                          aria-label="Toggle bookmark"
+                          aria-label={`Bookmark ${problem.title}`}
+                          aria-pressed={bookmarked}
                           onClick={() => progressRepo.toggleBookmarked(problem.id)}
-                          className={`opacity-0 transition-opacity group-hover:opacity-100 ${
+                          className={`opacity-0 transition-opacity group-hover:opacity-100 focus-visible:opacity-100 ${
                             bookmarked ? "opacity-100" : ""
                           }`}
                         >
                           <Bookmark
+                            aria-hidden="true"
                             className={`h-3.5 w-3.5 ${
                               bookmarked
                                 ? "fill-gold text-gold"
@@ -109,10 +111,12 @@ export function ProblemTable({
                   <td className="px-3 py-2 text-center align-middle">
                     <button
                       onClick={() => progressRepo.toggleNeedsRevision(problem.id)}
-                      aria-label="Toggle needs revision"
+                      aria-label={`Mark ${problem.title} as needs revision`}
+                      aria-pressed={rev}
                       className="inline-flex h-6 w-6 items-center justify-center rounded-md text-muted-foreground hover:bg-hover hover:text-foreground"
                     >
                       <RotateCcw
+                        aria-hidden="true"
                         className={`h-3.5 w-3.5 ${
                           rev ? "text-warning" : ""
                         }`}
@@ -127,7 +131,7 @@ export function ProblemTable({
                       className="inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium text-primary hover:bg-primary-soft"
                     >
                       Solve
-                      <ExternalLink className="h-3 w-3" />
+                      <ExternalLink aria-hidden="true" className="h-3 w-3" />
                     </a>
                   </td>
                 </tr>
@@ -152,6 +156,7 @@ export function ProblemTable({
               <Checkbox
                 checked={done}
                 onCheckedChange={() => progressRepo.toggleCompleted(problem.id)}
+                aria-label={`Mark ${problem.title} as completed`}
                 className="mt-0.5"
               />
               <div className="min-w-0 flex-1">
@@ -179,15 +184,25 @@ export function ProblemTable({
                   problemTitle={problem.title}
                   variant="mobile"
                 />
-                <button onClick={() => progressRepo.toggleBookmarked(problem.id)}>
+                <button
+                  aria-label={`Bookmark ${problem.title}`}
+                  aria-pressed={bookmarked}
+                  onClick={() => progressRepo.toggleBookmarked(problem.id)}
+                >
                   <Bookmark
+                    aria-hidden="true"
                     className={`h-4 w-4 ${
                       bookmarked ? "fill-gold text-gold" : "text-muted-foreground"
                     }`}
                   />
                 </button>
-                <button onClick={() => progressRepo.toggleNeedsRevision(problem.id)}>
+                <button
+                  aria-label={`Mark ${problem.title} as needs revision`}
+                  aria-pressed={rev}
+                  onClick={() => progressRepo.toggleNeedsRevision(problem.id)}
+                >
                   <RotateCcw
+                    aria-hidden="true"
                     className={`h-4 w-4 ${rev ? "text-warning" : "text-muted-foreground"}`}
                   />
                 </button>
