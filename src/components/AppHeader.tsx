@@ -35,22 +35,20 @@ export function AppHeader({ title }: { title: string }) {
   }, [setQuery]);
 
   return (
-    <header className="sticky top-2 z-30 mx-auto w-full max-w-7xl px-3 sm:px-4 md:top-3 md:px-6">
-      <div className="flex h-13 sm:h-14 items-center gap-2.5 sm:gap-3 rounded-2xl border border-border/60 bg-card px-3 sm:px-4 shadow-md backdrop-blur-xl">
+    <header className="sticky top-2 z-30 mx-auto w-full max-w-7xl px-2.5 sm:px-4 md:top-3 md:px-6">
+      <div className="flex h-13 sm:h-14 items-center gap-2 sm:gap-3 rounded-2xl border border-border/60 bg-card px-2.5 sm:px-4 shadow-md backdrop-blur-xl">
         <SidebarTrigger className="shrink-0 text-muted-foreground hover:text-foreground" />
         <div className="hidden min-w-0 items-center md:flex">
-          <h1 className="truncate text-sm font-semibold text-foreground">
-            {title}
-          </h1>
+          <h1 className="truncate text-sm font-semibold text-foreground">{title}</h1>
         </div>
-        <div className="relative ml-auto w-full max-w-xs sm:max-w-sm">
+        <div className="relative ml-auto w-full max-w-[200px] xs:max-w-xs sm:max-w-sm">
           <Search className="pointer-events-none absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <Input
             ref={inputRef}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search problems, topics, patterns…"
-            className={`h-9 border-border/60 bg-surface/70 pl-8 pr-8 text-sm backdrop-blur-sm transition-all focus:bg-surface focus:ring-1 focus:ring-primary ${
+            placeholder="Search problems, topics…"
+            className={`h-9 border-border/60 bg-surface/70 pl-8 pr-7 text-xs sm:text-sm backdrop-blur-sm transition-all focus:bg-surface focus:ring-1 focus:ring-primary ${
               query ? "" : "md:pr-16"
             }`}
             aria-label="Search problems and topics"
@@ -69,10 +67,10 @@ export function AppHeader({ title }: { title: string }) {
                 setQuery("");
                 inputRef.current?.focus();
               }}
-              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground transition-colors hover:text-foreground"
+              className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-muted-foreground transition-colors hover:text-foreground cursor-pointer"
               aria-label="Clear search query"
             >
-              <X className="h-4 w-4" />
+              <X className="h-3.5 w-3.5" />
             </button>
           )}
         </div>

@@ -47,25 +47,23 @@ export function LevelAccordion({
         onClick={handleToggle}
         aria-expanded={open}
         aria-controls={`level-panel-${level.number}`}
-        className="group flex w-full items-center gap-4 px-4 py-3 text-left hover:bg-hover/80 transition-colors duration-150 cursor-pointer"
+        className="group flex w-full items-center gap-3 sm:gap-4 p-3 sm:px-4 sm:py-3 text-left hover:bg-hover/80 transition-colors duration-150 cursor-pointer"
       >
-        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-primary-soft text-xs font-semibold text-primary transition-colors duration-200 group-hover:bg-primary group-hover:text-primary-foreground">
+        <div className="flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-md bg-primary-soft text-xs font-semibold text-primary transition-colors duration-200 group-hover:bg-primary group-hover:text-primary-foreground">
           {level.number}
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2">
-            <span className="text-sm font-semibold text-foreground transition-colors group-hover:text-primary">
+            <span className="text-sm font-semibold text-foreground transition-colors group-hover:text-primary break-words">
               Level {level.number} — {level.title}
             </span>
-            {done && (
-              <Check aria-hidden="true" className="h-3.5 w-3.5 text-success" />
-            )}
+            {done && <Check aria-hidden="true" className="h-3.5 w-3.5 shrink-0 text-success" />}
           </div>
-          <div className="mt-1.5 flex items-center gap-3">
+          <div className="mt-1.5 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
             <ProgressBar
               value={pct}
               label={`Level ${level.number} progress`}
-              className="max-w-[240px]"
+              className="w-full sm:max-w-[200px] md:max-w-[240px]"
             />
             <span className="shrink-0 text-xs text-muted-foreground">
               {solved} / {total} completed
@@ -79,14 +77,20 @@ export function LevelAccordion({
           }`}
         />
       </button>
-      {open && (
-        <div
-          id={`level-panel-${level.number}`}
-          className="border-t border-border/50 bg-surface/40 backdrop-blur-md p-3 md:p-4 animate-in fade-in-50 duration-200"
-        >
-          <ProblemTable rows={rows} />
+      <div
+        className={`grid transition-[grid-template-rows,opacity] duration-300 ease-in-out ${
+          open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+        }`}
+      >
+        <div className="overflow-hidden">
+          <div
+            id={`level-panel-${level.number}`}
+            className="border-t border-border/50 bg-surface/40 backdrop-blur-md p-2.5 sm:p-3 md:p-4"
+          >
+            <ProblemTable rows={rows} />
+          </div>
         </div>
-      )}
+      </div>
     </div>
   );
 }

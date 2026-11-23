@@ -26,7 +26,7 @@ export function ProblemTable({
   return (
     <>
       {/* Desktop table */}
-      <div className="hidden overflow-hidden rounded-lg border border-border/70 bg-surface shadow-xs backdrop-blur-md md:block">
+      <div className="hidden overflow-x-auto rounded-lg border border-border/70 bg-surface shadow-xs backdrop-blur-md md:block">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-border/60 bg-surface-muted/80 text-left text-xs font-medium uppercase tracking-wide text-muted-foreground">
@@ -70,7 +70,10 @@ export function ProblemTable({
                         {problem.title}
                       </a>
                       {done && (
-                        <Check aria-hidden="true" className="h-3.5 w-3.5 text-success animate-in fade-in-50 duration-200" />
+                        <Check
+                          aria-hidden="true"
+                          className="h-3.5 w-3.5 text-success animate-in fade-in-50 duration-200"
+                        />
                       )}
                       <div className="ml-auto flex items-center gap-2">
                         <ProblemNotes
@@ -83,9 +86,7 @@ export function ProblemTable({
                           aria-pressed={bookmarked}
                           onClick={() => progressRepo.toggleBookmarked(problem.id)}
                           className={`cursor-pointer transition-all duration-200 hover:scale-115 active:scale-90 focus-visible:opacity-100 ${
-                            bookmarked
-                              ? "opacity-100"
-                              : "opacity-0 group-hover:opacity-100"
+                            bookmarked ? "opacity-100" : "opacity-0 group-hover:opacity-100"
                           }`}
                         >
                           <Bookmark
@@ -145,7 +146,7 @@ export function ProblemTable({
       </div>
 
       {/* Mobile cards */}
-      <div className="space-y-2 md:hidden">
+      <div className="space-y-2.5 md:hidden">
         {rows.map(({ problem }, i) => {
           const entry = progress[problem.id];
           const done = !!entry?.completed;
@@ -154,71 +155,91 @@ export function ProblemTable({
           return (
             <div
               key={`${problem.id}-m-${i}`}
-              className="flex items-start gap-3 rounded-lg border border-border/60 bg-surface backdrop-blur-md p-3 transition-all duration-200 hover:border-primary/40 hover:shadow-sm"
+              className="rounded-lg border border-border/60 bg-surface backdrop-blur-md p-3 transition-all duration-200 hover:border-primary/40 hover:shadow-xs"
             >
-              <Checkbox
-                checked={done}
-                onCheckedChange={() => progressRepo.toggleCompleted(problem.id)}
-                aria-label={`Mark ${problem.title} as completed`}
-                className="mt-0.5 transition-transform duration-150 active:scale-90 cursor-pointer"
-              />
-              <div className="min-w-0 flex-1">
-                <a
-                  href={problem.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block truncate text-sm font-medium text-foreground transition-colors hover:text-primary"
-                >
-                  {problem.title}
-                </a>
-                <div className="mt-1 flex flex-wrap items-center gap-1.5 text-[11px] text-muted-foreground">
-                  <DifficultyBadge difficulty={problem.difficulty} />
-                  <PlatformBadge platform={problem.platform} />
-                </div>
-                {showNotes && hasNotes(entry?.notes) && (
-                  <p className="mt-1.5 line-clamp-2 whitespace-pre-line text-xs text-muted-foreground">
-                    {entry!.notes}
-                  </p>
-                )}
-              </div>
-              <div className="flex flex-col items-end gap-1.5">
-                <ProblemNotes
-                  problemId={problem.id}
-                  problemTitle={problem.title}
-                  variant="mobile"
+              <div className="flex items-start gap-2.5">
+                <Checkbox
+                  checked={done}
+                  onCheckedChange={() => progressRepo.toggleCompleted(problem.id)}
+                  aria-label={`Mark ${problem.title} as completed`}
+                  className="mt-0.5 shrink-0 transition-transform duration-150 active:scale-90 cursor-pointer"
                 />
-                <button
-                  aria-label={`Bookmark ${problem.title}`}
-                  aria-pressed={bookmarked}
-                  onClick={() => progressRepo.toggleBookmarked(problem.id)}
-                  className="transition-transform duration-150 hover:scale-115 active:scale-90 cursor-pointer"
-                >
-                  <Bookmark
-                    aria-hidden="true"
-                    className={`h-4 w-4 transition-colors ${
-                      bookmarked ? "fill-gold text-gold" : "text-muted-foreground"
-                    }`}
-                  />
-                </button>
-                <button
-                  aria-label={`Mark ${problem.title} as needs revision`}
-                  aria-pressed={rev}
-                  onClick={() => progressRepo.toggleNeedsRevision(problem.id)}
-                  className="transition-transform duration-150 hover:scale-115 active:scale-90 cursor-pointer"
-                >
-                  <RotateCcw
-                    aria-hidden="true"
-                    className={`h-4 w-4 transition-colors ${rev ? "text-warning" : "text-muted-foreground"}`}
-                  />
-                </button>
-                <a
-                  href={problem.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-0.5 text-xs font-medium text-primary hover:underline"
-                >
-                  Solve ↗
-                </a>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-start justify-between gap-2">
+                    <a
+                      href={problem.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`block break-words text-sm font-medium transition-colors hover:text-primary ${
+                        done
+                          ? "text-muted-foreground line-through decoration-muted-foreground/50"
+                          : "text-foreground"
+                      }`}
+                    >
+                      {problem.title}
+                    </a>
+                    <a
+                      href={problem.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex shrink-0 items-center gap-1 rounded-md px-2 py-0.5 text-xs font-medium text-primary hover:bg-primary-soft transition-colors"
+                      title="Solve problem"
+                    >
+                      <span>Solve</span>
+                      <ExternalLink aria-hidden="true" className="h-3 w-3" />
+                    </a>
+                  </div>
+
+                  <div className="mt-2 flex flex-wrap items-center justify-between gap-1.5 sm:gap-2">
+                    <div className="flex flex-wrap items-center gap-1.5">
+                      <DifficultyBadge difficulty={problem.difficulty} />
+                      <PlatformBadge platform={problem.platform} />
+                      {done && (
+                        <span className="inline-flex items-center gap-0.5 text-[11px] font-medium text-success">
+                          <Check className="h-3 w-3" /> Solved
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-0.5 sm:gap-1">
+                      <ProblemNotes
+                        problemId={problem.id}
+                        problemTitle={problem.title}
+                        variant="mobile"
+                      />
+                      <button
+                        aria-label={`Bookmark ${problem.title}`}
+                        aria-pressed={bookmarked}
+                        onClick={() => progressRepo.toggleBookmarked(problem.id)}
+                        className="flex h-9 w-9 items-center justify-center rounded-md text-muted-foreground hover:bg-hover hover:text-foreground active:scale-95 transition-all cursor-pointer"
+                        title={bookmarked ? "Remove bookmark" : "Bookmark problem"}
+                      >
+                        <Bookmark
+                          aria-hidden="true"
+                          className={`h-4 w-4 transition-colors ${
+                            bookmarked ? "fill-gold text-gold" : "text-muted-foreground"
+                          }`}
+                        />
+                      </button>
+                      <button
+                        aria-label={`Mark ${problem.title} as needs revision`}
+                        aria-pressed={rev}
+                        onClick={() => progressRepo.toggleNeedsRevision(problem.id)}
+                        className="flex h-9 w-9 items-center justify-center rounded-md text-muted-foreground hover:bg-hover hover:text-foreground active:scale-95 transition-all cursor-pointer"
+                        title={rev ? "Remove from revision" : "Flag for revision"}
+                      >
+                        <RotateCcw
+                          aria-hidden="true"
+                          className={`h-4 w-4 transition-colors ${rev ? "text-warning" : "text-muted-foreground"}`}
+                        />
+                      </button>
+                    </div>
+                  </div>
+                  {showNotes && hasNotes(entry?.notes) && (
+                    <p className="mt-2 line-clamp-2 whitespace-pre-line text-xs text-muted-foreground bg-surface-muted/50 rounded p-1.5 border border-border/40">
+                      {entry!.notes}
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
           );
